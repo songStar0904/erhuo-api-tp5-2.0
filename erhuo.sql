@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2018-04-05 07:11:44
+-- Generation Time: 2018-04-10 11:30:30
 -- 服务器版本： 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -49,7 +49,7 @@ CREATE TABLE `erhuo_dynamic` (
   `dynamic_lid` int(11) NOT NULL DEFAULT '0',
   `dynamic_type` int(11) NOT NULL COMMENT '0 全部 1文字 2 商品',
   `dynamic_gid` int(11) NOT NULL,
-  `dynamic_content` text NOT NULL,
+  `dynamic_content` text CHARACTER SET utf8mb4 NOT NULL,
   `dynamic_share` int(11) NOT NULL DEFAULT '0',
   `dynamic_time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='动态';
@@ -66,7 +66,17 @@ INSERT INTO `erhuo_dynamic` (`dynamic_id`, `dynamic_uid`, `dynamic_lid`, `dynami
 (7, 5, 0, 2, 26, '我发布了一个二货，快来看看~', 0, 1522406503),
 (8, 5, 0, 2, 27, '我发布了一个二货，快来看看~', 0, 1522406975),
 (9, 5, 0, 2, 28, '我发布了一个二货，快来看看~', 0, 1522407687),
-(10, 6, 0, 2, 29, '我发布了一个二货，快来看看~', 0, 1522824784);
+(10, 6, 0, 2, 29, '我发布了一个二货，快来看看~', 0, 1522824784),
+(12, 6, 0, 2, 35, '我发布了一个二货，快来看看~', 0, 1523254250),
+(14, 1, 0, 0, 0, '纸短情长啊\n诉不完当时年少\n我的故事还是关于你呀', 0, 1523262688),
+(16, 1, 0, 0, 0, '我真的好想你\n在每一个雨季\n你选择遗忘的\n是我最不舍的', 0, 1523263060),
+(19, 11, 0, 0, 0, '新人报到😁', 0, 1523329949),
+(25, 11, 0, 0, 0, '😝', 0, 1523333209),
+(26, 11, 0, 0, 0, '搜索', 0, 1523333290),
+(27, 11, 0, 0, 0, '搜索', 0, 1523333290),
+(28, 6, 0, 0, 0, 'asd', 0, 1523333443),
+(29, 6, 0, 0, 0, 'asd', 0, 1523333470),
+(30, 11, 0, 0, 0, '撒', 0, 1523333477);
 
 -- --------------------------------------------------------
 
@@ -162,7 +172,13 @@ INSERT INTO `erhuo_gicon` (`gIcon_id`, `gIcon_gid`, `gIcon_url`) VALUES
 (38, 28, 'http://api.erhuo.com/public/uploads/20180330/05ec878b578900c66f7fe5d9e89369c8.jpeg'),
 (39, 28, 'http://api.erhuo.com/public/uploads/20180330/2e2f43a7de9cda7558e3d6d548f28562.jpeg'),
 (40, 29, 'http://api.erhuo.com/public/uploads/20180404/29e4e51e4b1eaa48f3206bab3b5fb06c.jpg'),
-(41, 29, 'http://api.erhuo.com/public/uploads/20180404/fc7fdd6776a7a25cf7ea14408569d1f9.jpg');
+(41, 29, 'http://api.erhuo.com/public/uploads/20180404/fc7fdd6776a7a25cf7ea14408569d1f9.jpg'),
+(42, 30, 'http://api.erhuo.com/public/uploads/20180409/28e1dce297cdea38f2aa8bafab3f8fbf.jpg'),
+(43, 31, '12222'),
+(44, 32, 'http://api.erhuo.com/public/uploads/20180409/28e1dce297cdea38f2aa8bafab3f8fbf.jpg'),
+(45, 33, '12222'),
+(46, 34, '12222'),
+(47, 35, 'http://api.erhuo.com/public/uploads/20180409/28e1dce297cdea38f2aa8bafab3f8fbf.jpg');
 
 -- --------------------------------------------------------
 
@@ -196,7 +212,7 @@ CREATE TABLE `erhuo_goods` (
 INSERT INTO `erhuo_goods` (`goods_id`, `goods_uid`, `goods_cid`, `goods_name`, `goods_status`, `goods_spread`, `goods_oprice`, `goods_nprice`, `goods_address`, `goods_type`, `goods_summary`, `phone`, `qq`, `wechat`, `goods_time`, `goods_view`) VALUES
 (1, 2, 1, '好东西1', 2, 0, 1000, 5, '600985', 0, '安安啊啊暗暗爱爱爱啊啊啊啊啊啊啊啊啊让啊啊在正在砸啊啊啊啊啊在正在组织指责则啊啊啊啊啊啊啊啊啊啊啊啊啊', '15574406229', NULL, '', 1517549569, 74),
 (2, 2, 1, '好东西2', 2, 0, 10, 5, '600985', 0, '啊啊啊让啊啊在正在砸啊啊啊啊啊在正在组织指责则啊啊啊啊啊啊啊啊啊啊啊啊啊', '', NULL, 'songstar', 1517549717, 2),
-(3, 1, 4, '好东西', 2, 0, 10, 5, '&lt;script&gt;arlert(''hello'')&lt;/script&gt;', 0, '修改', '', NULL, 'songstar', 1520574836, 155),
+(3, 1, 4, '好东西', 2, 0, 10, 5, '&lt;script&gt;arlert(''hello'')&lt;/script&gt;', 0, '修改', '', NULL, 'songstar', 1520574836, 156),
 (10, 1, 1, '123', 0, 0, 1000, 2, '', 0, '2145', '', NULL, 'songstar', 1519742735, 22),
 (11, 1, 1, '小谈表情', 1, 0, 1, 1, '小谈表情小谈表情', 0, '小谈表情小谈表情', '', NULL, 'songstar', 1519742828, 136),
 (12, 1, 1, '123', 2, 0, 1, 2, '', 0, '2145', '', 1043328710, 'songstar', 1519742857, 0),
@@ -205,14 +221,20 @@ INSERT INTO `erhuo_goods` (`goods_id`, `goods_uid`, `goods_cid`, `goods_name`, `
 (16, 1, 1, '小谈表情', 1, 0, 1, 1, '小谈表情小谈表情', 0, '小谈表情小谈表情', '', 1043328710, 'songstar', 1519743075, 0),
 (17, 1, 1, '小谈表情', 2, 0, 1, 1, '小谈表情小谈表情', 0, '小谈表情小谈表情', '', NULL, '0songstar', 1519743129, 0),
 (18, 3, 4, '薄荷绿双肩包', 2, 0, 50, 8, '北校区6区7栋615', 2, '春夏要来了，这个颜色可以说是非常清新了，学姐要毕业了，转手送学妹啊，请学姐喝杯奶茶就行ʚتɞ', '15574406224', 1043328710, '', 1521271843, 26),
-(19, 5, 8, '水乳', 2, 0, 50, 30, '南校区2区2栋222', 2, '植物日记水乳套装\n去年九月份买的 闲置到现在 乳液有点少了\n ', '15573318829', 0, '', 1521643841, 27),
+(19, 5, 8, '水乳', 2, 0, 50, 30, '南校区2区2栋222', 2, '植物日记水乳套装\n去年九月份买的 闲置到现在 乳液有点少了\n ', '15573318829', 0, '', 1521643841, 28),
 (20, 2, 5, '鬼火摩托车', 0, 0, 2600, 2000, '7区1栋222', 2, '上学期中期刚买的新车，进口鬼火入手时2600，到现在骑了不到四百公里。2000出手，全新，加油很给力。', '15574406229', 1043328710, '', 1522041292, 2),
 (21, 4, 7, '风扇', 0, 0, 45, 15, '6-7-616', 0, '宿舍用风扇，8成新，原价45，现价15，可讲价', '', 1043328710, '', 1522139168, 0),
-(25, 5, 1, '钱理群中国现代文学三十年', 0, 0, 25, 15, '湖南科技大学北校区9教', 0, '钱理群的中国现代文学三十年，图书保存完好，考研很多大学都用这本的哦～有需要的学弟学妹们看过来～', '15573318829', 0, '', 1522142601, 0),
-(26, 5, 7, '电热饭盒', 0, 1, 49, 29, '北校区十教学楼', 0, '可以煮面，热饭等等，原价49', '15573318829', 0, '', 1522406503, 1),
-(27, 5, 1, '《道德经》', 0, 1, 50, 20, '樱花园', 0, '八成新', '15573318829', 0, '', 1522406975, 1),
-(28, 5, 8, '床上书桌', 1, 0, 150, 80, '北校区6-7-616', 2, '原价150，只用了一个学期 无损坏，如果购买女生可以上门帮忙组装，也可以帮助送到您的寝室。', '15573318829', 0, '', 1522407687, 13),
-(29, 6, 8, '眼镜框', 0, 0, 50, 35, '6-7-616', 0, '从没带过，几乎全新，可以自配镜片，放着没用低价卖了。', '15673226596', 0, 'zohar', 1522824784, 0);
+(25, 5, 1, '钱理群中国现代文学三十年', 0, 0, 25, 15, '湖南科技大学北校区9教', 0, '钱理群的中国现代文学三十年，图书保存完好，考研很多大学都用这本的哦～有需要的学弟学妹们看过来～', '15573318829', 0, '', 1522142601, 2),
+(26, 5, 7, '电热饭盒', 0, 1, 49, 29, '北校区十教学楼', 0, '可以煮面，热饭等等，原价49', '15573318829', 0, '', 1522406503, 2),
+(27, 5, 1, '《道德经》', 0, 1, 50, 20, '樱花园', 0, '八成新', '15573318829', 0, '', 1522406975, 3),
+(28, 5, 8, '床上书桌', 2, 1, 150, 80, '北校区6-7-616', 2, '原价150，只用了一个学期 无损坏，如果购买女生可以上门帮忙组装，也可以帮助送到您的寝室。', '15573318829', 0, '', 1522407687, 14),
+(29, 6, 8, '眼镜框', 2, 0, 50, 35, '6-7-616', 0, '从没带过，几乎全新，可以自配镜片，放着没用低价卖了。', '15673226596', 0, 'zohar', 1522824784, 8),
+(30, 6, 2, 'B.O.W 航式充电无线键盘', 2, 1, 99, 50, '6-7-616', 2, '京东正品，只用了不到两天（聊天打字，其他没动过），说明书齐全，可验货，买了绝对不亏，办公绝佳搭档。想重买个机械键盘，所以低价出售。', '15673226596', 0, 'zohar', 1523254021, 1),
+(31, 1, 1, '123', 1, 0, 1, 2, '', 0, '2145', '', NULL, '', 1523254067, 0),
+(32, 6, 2, 'B.O.W 航式充电无线键盘', 3, 0, 99, 50, '6-7-616', 2, '京东正品，只用了不到两天（聊天打字，其他没动过），说明书齐全，可验货，买了绝对不亏，办公绝佳搭档。想重买个机械键盘，所以低价出售。', '15673226596', 0, 'zohar', 1523254177, 0),
+(33, 1, 1, '123', 1, 0, 1, 2, '', 0, '2145', '', NULL, '', 1523254184, 0),
+(34, 1, 1, '123', 1, 0, 1, 2, '', 0, '2145', '', NULL, '', 1523254245, 0),
+(35, 6, 2, 'B.O.W 航式充电无线键盘', 1, 0, 99, 50, '6-7-616', 2, '京东正品，只用了不到两天（聊天打字，其他没动过），说明书齐全，可验货，买了绝对不亏，办公绝佳搭档。想重买个机械键盘，所以低价出售。', '15673226596', 0, 'zohar', 1523254250, 3);
 
 -- --------------------------------------------------------
 
@@ -264,7 +286,7 @@ CREATE TABLE `erhuo_grecord` (
 INSERT INTO `erhuo_grecord` (`grecord_id`, `grecord_gid`, `grecord_uid`, `grecord_time`) VALUES
 (1, 1, 1, 1521122698),
 (4, 1, 2, 1517589457),
-(5, 3, 1, 1521621360),
+(5, 3, 1, 1523253211),
 (6, 11, 1, 1521122739),
 (7, 3, 3, 1521280746),
 (8, 10, 3, 1521271178),
@@ -279,7 +301,15 @@ INSERT INTO `erhuo_grecord` (`grecord_id`, `grecord_gid`, `grecord_uid`, `grecor
 (17, 27, 5, 1522407309),
 (18, 10, 2, 1522471076),
 (19, 11, 2, 1522472110),
-(20, 26, 2, 1522472116);
+(20, 26, 2, 1522472116),
+(21, 25, 1, 1523265403),
+(22, 29, 1, 1523251500),
+(23, 27, 1, 1523265205),
+(24, 28, 1, 1523205649),
+(25, 19, 1, 1523250533),
+(26, 35, 1, 1523265980),
+(27, 26, 1, 1523265180),
+(28, 30, 11, 1523329907);
 
 -- --------------------------------------------------------
 
@@ -339,7 +369,7 @@ CREATE TABLE `erhuo_main` (
 --
 
 INSERT INTO `erhuo_main` (`main_id`, `main_gnum`, `main_unum`, `main_egnum`, `main_fnum`) VALUES
-(0, 19, 6, 7, 7);
+(0, 25, 6, 10, 7);
 
 -- --------------------------------------------------------
 
@@ -378,7 +408,17 @@ INSERT INTO `erhuo_notice` (`notice_id`, `notice_uid`, `notice_lid`, `notice_tit
 (18, 1, 1, '商品审核通过通知', '亲爱的songstar, 您于2018-02-27 22:51:15发布的商品(小谈表情)已通过审核, 快去看一下吧~。&lt;br&gt;审核人:songstar', 1521714989),
 (19, 1, 1, '商品通过审核通知', '亲爱的songstar, 您于2018-02-27 22:47:37发布的商品(123)已通过审核, 快去看一下吧~。&lt;br&gt;审核人:songstar', 1521715280),
 (20, 1, 1, '商品审核通过通知', '亲爱的songstar, 您于2018-03-9 13:53:56发布的商品(好东西)已通过审核, 快去看一下吧~。&lt;br&gt;审核人:songstar', 1521715341),
-(21, 1, 1, '商品审核未通过通知', '亲爱的songstar, 您于2018-02-27 22:51:15发布的商品(小谈表情)未能通过审核,请修改后等待我们的下一次审核。&lt;br&gt;原因：你太菜了&lt;br&gt;审核人:songstar', 1521715390);
+(21, 1, 1, '商品审核未通过通知', '亲爱的songstar, 您于2018-02-27 22:51:15发布的商品(小谈表情)未能通过审核,请修改后等待我们的下一次审核。&lt;br&gt;原因：你太菜了&lt;br&gt;审核人:songstar', 1521715390),
+(22, 1, 1, '商品审核未通过通知', '亲爱的二货官方, 您于2018-04-9 14:10:45发布的商品(123)未能通过审核,请修改后等待我们的下一次审核。&lt;br&gt;原因：信息不全&lt;br&gt;审核人:二货官方', 1523254735),
+(23, 1, 1, '商品审核通过通知', '亲爱的二货官方, 您于2018-04-9 14:9:44发布的商品(123)已通过审核, 快去看一下吧~。&lt;br&gt;审核人:二货官方', 1523254749),
+(24, 1, 1, '商品审核通过通知', '亲爱的二货官方, 您于2018-04-9 14:7:47发布的商品(123)已通过审核, 快去看一下吧~。&lt;br&gt;审核人:二货官方', 1523254793),
+(25, 1, 1, '商品审核未通过通知', '亲爱的二货官方, 您于2018-04-9 14:7:47发布的商品(123)未能通过审核,请修改后等待我们的下一次审核。&lt;br&gt;原因：信息不全&lt;br&gt;审核人:二货官方', 1523254824),
+(26, 1, 6, '商品审核未通过通知', '亲爱的吴志豪, 您于2018-04-9 14:10:50发布的商品(B.O.W 航式充电无线键盘)未能通过审核,请修改后等待我们的下一次审核。&lt;br&gt;原因：阿什顿&lt;br&gt;审核人:二货官方', 1523255390),
+(27, 1, 6, '商品已下架通知', '亲爱的吴志豪, 您于2018-04-9 14:9:37发布的商品(B.O.W 航式充电无线键盘)已下架。感谢您的发布。&lt;br&gt;审核人:二货官方', 1523255430),
+(28, 1, 1, '商品审核未通过通知', '亲爱的二货官方, 您于2018-04-9 14:9:44发布的商品(123)未能通过审核,请修改后等待我们的下一次审核。&lt;br&gt;原因：信息不全&lt;br&gt;审核人:二货官方', 1523255842),
+(29, 1, 6, '商品审核通过通知', '亲爱的吴志豪, 您于2018-04-4 14:53:4发布的商品(眼镜框)已通过审核, 快去看一下吧~。&lt;br&gt;审核人:二货官方', 1523255856),
+(30, 1, 5, '商品审核通过通知', '亲爱的王玥, 您于2018-03-30 19:1:27发布的商品(床上书桌)已通过审核, 快去看一下吧~。&lt;br&gt;审核人:二货官方', 1523255895),
+(31, 1, 6, '商品审核通过通知', '亲爱的吴志豪, 您于2018-04-9 14:7:1发布的商品(B.O.W 航式充电无线键盘)已通过审核, 快去看一下吧~。&lt;br&gt;审核人:二货官方', 1523255908);
 
 -- --------------------------------------------------------
 
@@ -410,7 +450,13 @@ INSERT INTO `erhuo_praise` (`praise_id`, `praise_type`, `praise_mid`, `praise_ui
 (14, 1, 3, 4, 1522141656),
 (15, 1, 7, 5, 1522406689),
 (16, 1, 2, 5, 1522406694),
-(17, 1, 9, 2, 1522549130);
+(17, 1, 9, 2, 1522549130),
+(18, 1, 9, 1, 1523206501),
+(19, 1, 10, 1, 1523206503),
+(20, 1, 1, 1, 1523252008),
+(21, 1, 2, 1, 1523253427),
+(22, 1, 14, 1, 1523263189),
+(23, 1, 6, 1, 1523265332);
 
 -- --------------------------------------------------------
 
@@ -473,7 +519,7 @@ CREATE TABLE `erhuo_user` (
   `user_id` int(11) NOT NULL,
   `user_name` varchar(11) NOT NULL,
   `user_psd` varchar(32) NOT NULL,
-  `user_phone` char(11) NOT NULL,
+  `user_phone` char(11) DEFAULT NULL,
   `user_email` varchar(255) NOT NULL,
   `user_sid` int(5) NOT NULL COMMENT '学校id',
   `user_sex` varchar(20) NOT NULL COMMENT '性别',
@@ -492,12 +538,13 @@ CREATE TABLE `erhuo_user` (
 --
 
 INSERT INTO `erhuo_user` (`user_id`, `user_name`, `user_psd`, `user_phone`, `user_email`, `user_sid`, `user_sex`, `user_rtime`, `user_ltime`, `user_lntime`, `user_icon`, `user_ip`, `user_sign`, `user_access`, `user_pop`) VALUES
-(1, '二货官方', 'e10adc3949ba59abbe56e057f20f883e', '15574406224', '1043328710@qq.com', 448, 'male', 1519794623, 1522826539, 1522824508, 'http://api.erhuo.com/public/uploads/20180308/0c7d58a57bff751dcc55d36d68c6de33.jpg', '127.0.0.1', '欢迎光临西西书店，有事可以电话联系15152013154', 1, 44),
+(1, '二货官方', 'e10adc3949ba59abbe56e057f20f883e', '15574406224', '1043328710@qq.com', 448, 'male', 1519794623, 1523259788, 1523267785, 'http://api.erhuo.com/public/uploads/20180308/0c7d58a57bff751dcc55d36d68c6de33.jpg', '127.0.0.1', '欢迎光临西西书店，有事可以电话联系15152013154', 1, 53),
 (2, 'songstar', 'e10adc3949ba59abbe56e057f20f883e', '15574406229', '', 448, 'male', 1519794623, 1522810047, 1522549526, 'http://api.erhuo.com/public/uploads/user_icon/default1.png', '127.0.0.1', '我是猪', 0, 25),
 (3, 'admin@amare', 'e10adc3949ba59abbe56e057f20f883e', '', 'admin@amare.cc', 1, 'female', 1519706734, 1521700947, 1521715050, 'http://api.erhuo.com/public/uploads/user_icon/default8.png', '127.0.0.1', '', 0, 15),
 (4, '兰兰', 'e10adc3949ba59abbe56e057f20f883e', '18173278879', '', 59, 'female', 1520486498, 1522139043, 0, 'http://api.erhuo.com/public/uploads/user_icon/default7.png', '127.0.0.1', '', 0, 8),
 (5, '王玥', 'e10adc3949ba59abbe56e057f20f883e', '15573318829', '', 448, '女生', 1521647852, 1522406228, 1522407079, 'http://api.erhuo.com/public/uploads/user_icon/default4.png', '127.0.0.1', '我是王玥..巴拉巴拉', 0, 6),
-(6, '吴志豪', 'e10adc3949ba59abbe56e057f20f883e', '15673226596', '', 448, 'male', 1522822389, 1522824535, 1522824861, 'http://api.erhuo.com/public/uploads/user_icon/default7.png', '127.0.0.1', '', 0, 3);
+(6, '吴志豪', 'e10adc3949ba59abbe56e057f20f883e', '15673226596', '', 448, 'male', 1522822389, 1523333352, 1523254942, 'http://api.erhuo.com/public/uploads/user_icon/default7.png', '127.0.0.1', '', 0, 14),
+(11, '1478265495@', 'e10adc3949ba59abbe56e057f20f883e', NULL, '1478265495@qq.com', 448, 'male', 1523329747, 1523329783, 1523333482, 'http://api.erhuo.com/public/uploads/user_icon/default6.png', '127.0.0.1', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -526,7 +573,8 @@ INSERT INTO `erhuo_userrship` (`usership_id`, `fans_id`, `followers_id`, `follow
 (71, 3, 3, 1521276431),
 (72, 5, 2, 1522406734),
 (73, 5, 1, 1522406742),
-(74, 5, 5, 1522407317);
+(74, 5, 5, 1522407317),
+(75, 1, 6, 1523265983);
 
 --
 -- Indexes for dumped tables
@@ -650,7 +698,7 @@ ALTER TABLE `erhuo_dmsg`
 -- 使用表AUTO_INCREMENT `erhuo_dynamic`
 --
 ALTER TABLE `erhuo_dynamic`
-  MODIFY `dynamic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `dynamic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- 使用表AUTO_INCREMENT `erhuo_fmsg`
 --
@@ -665,12 +713,12 @@ ALTER TABLE `erhuo_gclassify`
 -- 使用表AUTO_INCREMENT `erhuo_gicon`
 --
 ALTER TABLE `erhuo_gicon`
-  MODIFY `gIcon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `gIcon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- 使用表AUTO_INCREMENT `erhuo_goods`
 --
 ALTER TABLE `erhuo_goods`
-  MODIFY `goods_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `goods_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- 使用表AUTO_INCREMENT `erhuo_goodsrship`
 --
@@ -680,7 +728,7 @@ ALTER TABLE `erhuo_goodsrship`
 -- 使用表AUTO_INCREMENT `erhuo_grecord`
 --
 ALTER TABLE `erhuo_grecord`
-  MODIFY `grecord_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `grecord_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- 使用表AUTO_INCREMENT `erhuo_lmsg`
 --
@@ -690,12 +738,12 @@ ALTER TABLE `erhuo_lmsg`
 -- 使用表AUTO_INCREMENT `erhuo_notice`
 --
 ALTER TABLE `erhuo_notice`
-  MODIFY `notice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `notice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- 使用表AUTO_INCREMENT `erhuo_praise`
 --
 ALTER TABLE `erhuo_praise`
-  MODIFY `praise_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `praise_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- 使用表AUTO_INCREMENT `erhuo_report`
 --
@@ -710,12 +758,12 @@ ALTER TABLE `erhuo_search`
 -- 使用表AUTO_INCREMENT `erhuo_user`
 --
 ALTER TABLE `erhuo_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- 使用表AUTO_INCREMENT `erhuo_userrship`
 --
 ALTER TABLE `erhuo_userrship`
-  MODIFY `usership_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `usership_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 --
 -- 限制导出的表
 --
