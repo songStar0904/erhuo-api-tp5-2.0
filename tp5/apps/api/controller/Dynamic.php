@@ -14,8 +14,22 @@ class Dynamic extends Common {
 		$uid = session('user_id');
 		$join = [['erhuo_user u', 'u.user_id = d.dynamic_uid']];
 		$field = 'dynamic_id, dynamic_content, dynamic_time, dynamic_time, dynamic_type, dynamic_gid, dynamic_share, user_id, user_name, user_icon';
-		$_db = db('dynamic')->alias('d')->join($join)->field($field)->order('dynamic_time desc')->page($data['page'], $data['num']);
-		$res = $_db->select();
+		$_db = db('dynamic')->alias('d')->join($join)->field($field)->order('dynamic_time desc');
+		if ($data['type'] > 0 && $data['type'] < 3) {
+			$_db = $_db->where('dynamic_type', $data['type']);
+		}
+
+		if ($data['type'] > 2) {
+
+			$fans_id = $this->get_follower($uid);
+			$res = $_db->where('dynamic_uid', 'IN', function ($query) {
+				$uid = session('user_id');
+				$query->table('erhuo_userrship')->where('fans_id', $uid)->field('followers_id');
+			})->page($data['page'], $data['num'])->select();
+		} else {
+			$res = $_db->page($data['page'], $data['num'])->select();
+		}
+
 		// ->chunk(100, function ($item) {
 		// 	foreach ($item as $key => $value) {
 		// 		$item[$key]['praise_num'] = db('praise')->where('praise_type=1 AND praise_mid=' . $value['dynamic_id'])->count();
@@ -55,7 +69,7 @@ class Dynamic extends Common {
 		if (!$res) {
 			$this->return_msg(400, '发布动态失败');
 		} else {
-			$id = db('dynamic')->order('dynamic_time desc')->page(1,1)->find()['dynamic_id'];
+			$id = db('dynamic')->order('dynamic_time desc')->page(1, 1)->find()['dynamic_id'];
 			$res = $this->get_one_dynamic($id);
 			$this->return_msg(200, '发布动态成功', $res);
 		}
@@ -73,6 +87,14 @@ class Dynamic extends Common {
 			$this->return_msg(400, '删除动态失败');
 		} else {
 			$this->return_msg(200, '删除动态成功', $res);
+		}
+	}
+	public function get_follower($uid) {
+		$res = db('userrship')->where('followers_id', $uid)->value('fans_id');
+		if ($res) {
+			return $res;
+		} else {
+			return [];
 		}
 	}
 }
