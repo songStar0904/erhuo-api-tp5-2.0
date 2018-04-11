@@ -166,12 +166,20 @@ class Goods extends Common {
 	}
 	public function delete() {
 		$data = $this->params;
-		$res = db('goods')->where('goods_id', $data['goods_id'])
-			->delete();
+		$access = session('user_access');
+		$uid = $this->login_uid();
+		$res = null;
+		if ($access === 1) {
+			$res = db('goods')->where('goods_id', $data['goods_id'])
+				->delete();
+		} else {
+			$res = db('goods')->where('goods_id', $data['goods_id'])->where('goods_uid', $uid)
+				->delete();
+		}
 		if ($res) {
 			$this->return_msg(200, '删除商品成功', $res);
 		} else {
-			$this->return_msg(400, '删除商品失败', $res);
+			$this->return_msg(400, '删除商品失败', '可能原因：您没有对此二货删除的权限');
 		}
 	}
 	public function follow() {
