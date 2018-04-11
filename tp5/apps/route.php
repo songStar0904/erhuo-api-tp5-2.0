@@ -65,7 +65,7 @@ Route::post('goods/del_img', 'goods/del_img');
 // 修改商品
 Route::post('goods/edit', 'goods/edit');
 // 删除商品
-Route::delete('goods/delete', 'goods/delete');
+Route::post('goods/delete', 'goods/delete');
 // 关注与取关
 Route::post('goods/follow', 'goods/follow');
 // 获得热搜
@@ -115,9 +115,6 @@ Route::post('dynamic/add', 'dynamic/add');
 Route::get('dynamic/get', 'dynamic/get');
 
 Route::post('dynamic/delete', 'dynamic/delete');
-
-// 举报
-Route::post('report/add', 'report/add');
 
 // 举报
 Route::post('report/add', 'report/add');

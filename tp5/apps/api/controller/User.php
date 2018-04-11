@@ -255,16 +255,16 @@ class User extends Common {
 		$res['sell_num'] = $sell_num;
 		return $res;
 	}
-	public function sold_goods(){
+	public function sold_goods() {
 		$data = $this->params;
 		$uid = $this->login_uid();
-		$status = db('goods')->where($data['goods_id'])->value('goods_status');
+		$status = db('goods')->where('goods_id', $data['goods_id'])->value('goods_status');
 		if ($status <= 1) {
-			$this->return_msg(200, '此二货还未通过审核');
+			$this->return_msg(400, '此二货还未通过审核, 暂不能下架');
 		}
-		$res = db('goods')->where($data['goods_id'])->where('goods_uid', $uid)->setField('goods_status', 3);
+		$res = db('goods')->where('goods_id', $data['goods_id'])->where('goods_uid', $uid)->setField('goods_status', 3);
 		if (!$res) {
-			$this->return_msg(400, '下架二货失败');
+			$this->return_msg(400, '下架二货失败', '可能原因：您没有对此二货下架的权限');
 		} else {
 			$this->return_msg(200, '下架二货成功', $res);
 		}

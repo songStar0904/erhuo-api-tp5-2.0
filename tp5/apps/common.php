@@ -86,8 +86,8 @@ class Common extends Controller {
 				'uid' => 'number',
 				'user_id' => 'require|number',
 				'type' => 'require|check_name:fans,followers'),
-			'sold_goods'=>array(
-				'goods_id' => 'number|require')
+			'sold_goods' => array(
+				'goods_id' => 'number|require'),
 		),
 		'Code' => array(
 			'get_code' => array(
@@ -212,7 +212,7 @@ class Common extends Controller {
 				'type' => 'require|number',
 				'page' => 'number',
 				'num' => 'number'),
-			'delete' =>array(
+			'delete' => array(
 				'id' => 'require|number')),
 		'Report' => array(
 			'add' => array(
@@ -578,11 +578,11 @@ class Common extends Controller {
 			}
 			if ($type == 1) {
 				// 收藏 留言
-			    $res['fans_num'] = db('goodsrship')->where('followers_id', $gid)->count();
-			    $res['goods_lmsg'] = $this->get_lmsg($gid, 'goods');
-			    $res['is_fans'] = $this->is_fans('goods', $gid, session('user_id'));
-		    }			
-		    return $res;
+				$res['fans_num'] = db('goodsrship')->where('followers_id', $gid)->count();
+				$res['goods_lmsg'] = $this->get_lmsg($gid, 'goods');
+				$res['is_fans'] = $this->is_fans('goods', $gid, session('user_id'));
+			}
+			return $res;
 		} else {
 			return false;
 		}
