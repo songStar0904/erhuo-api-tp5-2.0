@@ -32,7 +32,12 @@ class Goods extends Common {
 		$join = [['erhuo_user u', 'u.user_id = g.goods_uid'], ['erhuo_gclassify c', 'c.gclassify_id = g.goods_cid']];
 		$field = 'goods_id, goods_name, goods_status, goods_spread, goods_nprice, goods_oprice, goods_summary,goods_address, goods_time, goods_type, goods_view, gclassify_id, gclassify_name, user_id, user_name, user_icon';
 		$has_search = !isset($data['search']) ? 0 : 1;
-		$_db = db('goods')->alias('g')->join($join)->field($field);
+		// 排序方式
+		if (isset($data['sort']) && $data['sort'] == 'pop') {
+			$sort = 'goods_view';
+		} else {
+			$sort = 'goods_time';
+		}
 		$params = [];
 		if (isset($data['uid'])) {
 			$params['goods_uid'] = $data['uid'];
@@ -41,20 +46,24 @@ class Goods extends Common {
 		if (isset($data['cid']) && $data['cid'] !== '0') {
 			$params['goods_cid'] = $data['cid'];
 		}
+		if (isset($data['spread']) && $data['spread'] == 1) {
+			$params['goods_spread'] = 1;
+		}
+		if (isset($data['sold']) && $data['sold'] == 1) {
+			$params['goods_status'] = 3;
+		}
+		$_db = db('goods')->where($params);
+		$_cdb = db('goods')->where($params);
 		if ($access == 0) {
 			$_db = $_db->where('goods_status', '<>', 1);
+			$_cdb = $_cdb->where('goods_status', '<>', 1);
 		}
-		switch ($has_search) {
-		case 0:
-			$res = $_db->page($data['page'], $data['num'])->order('goods_time desc')->where($params)->select();
-			$total = $_db->where($params)->count();
-			break;
-		case 1:
-			$res = $_db->where('goods_name', 'like', '%' . $data['search'] . '%')->where($params)->page($data['page'], $data['num'])->order('goods_time desc')->select();
-			$total = $_db->where('goods_name', 'like', '%' . $data['search'] . '%')->where($params)->count();
-			break;
+		if ($has_search) {
+			$_db = $_db->where('goods_name', 'like', '%' . $data['search'] . '%');
+			$_cdb = $_cdb->where('goods_name', 'like', '%' . $data['search'] . '%');
 		}
-
+		$res = $_db->alias('g')->join($join)->field($field)->order($sort . ' desc')->page($data['page'], $data['num'])->select();
+		$total = $_cdb->count();
 		if ($res !== false) {
 			$res = $this->arrange_data($res, 'gclassify');
 			$res = $this->arrange_data($res, 'user');

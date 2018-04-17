@@ -145,4 +145,31 @@ class Message extends Common {
 			$this->return_msg(200, $msg, $res);
 		}
 	}
+	public function get_fmsg() {
+		$uid = $this->login_uid();
+		$join = [['erhuo_user u', 'u.user_id = f.fmsg_uid']];
+		$field = 'user_id, user_name, user_icon, fmsg_id, fmsg_content, fmsg_status, fmsg_time';
+		if (isset($data['fmsg_status'])) {
+			$res = db('fmsg')->alias('f')->join($join)->field($field)->where('fmsg_uid', $uid)->where('fmsg_status', $data['fmsg_status'])->order('fmsg_time desc')->select();
+		} else {
+			$res = db('fmsg')->alias('f')->join($join)->field($field)->where('fmsg_uid', $uid)->order('fmsg_time desc')->select();
+		}
+		if ($res !== false) {
+			$res = $this->arrange_data($res, 'user');
+			$total = count($res);
+			$this->return_msg(200, '获取反馈信息成功', $res, $total);
+		} else {
+			$this->return_msg(400, '获取反馈信息失败');
+		}
+	}
+	public function del_fmsg() {
+		$uid = $this->login_uid();
+		$data = $this->params;
+		$res = db('fmsg')->where('fmsg_id', $data['fmsg_id'])->where('fmsg_uid', $uid)->delete();
+		if (!$res) {
+			$this->return_msg(400, '删除反馈信息失败');
+		} else {
+			$this->return_msg(200, '删除反馈信息成功');
+		}
+	}
 }

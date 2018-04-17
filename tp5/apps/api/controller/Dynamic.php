@@ -89,12 +89,35 @@ class Dynamic extends Common {
 			$this->return_msg(200, '删除动态成功', $res);
 		}
 	}
+	public function share() {
+		$data = $this->params;
+		$data['dynamic_uid'] = $this->login_uid();
+		$data['dynamic_time'] = time();
+		$data['dynamic_type'] = $this->has_dynamic($data['dynamic_lid']);
+		$res = db('dynamic')->insert($data);
+		if (!$res) {
+			$this->return_msg(400, '分享动态失败');
+		} else {
+			$id = db('dynamic')->order('dynamic_time desc')->page(1, 1)->find()['dynamic_id'];
+			$res = $this->get_one_dynamic($id);
+			db('dynamic')->where('dynamic_id', $data['dynamic_lid'])->setInc('dynamic_share');
+			$this->return_msg(200, '分享动态成功', $res);
+		}
+	}
 	public function get_follower($uid) {
 		$res = db('userrship')->where('followers_id', $uid)->value('fans_id');
 		if ($res) {
 			return $res;
 		} else {
 			return [];
+		}
+	}
+	public function has_dynamic($id) {
+		$res = db('dynamic')->where('dynamic_id', $id)->value('dynamic_type');
+		if ($res) {
+			return $res;
+		} else {
+			$this->return_msg(400, '您的分享内容未找到');
 		}
 	}
 }

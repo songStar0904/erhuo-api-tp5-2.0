@@ -15,7 +15,7 @@ Route::domain('api', 'api');
 
 Route::get('user', 'user/login');
 // 获取验证码
-Route::get('code/get_code/:time/:token/:username/:is_exist', 'code/get_code');
+Route::get('code/get_code', 'code/get_code');
 // 用户注册
 Route::post('user/register', 'user/register');
 // 用户登录
@@ -86,6 +86,9 @@ Route::post('goods/follow', 'goods/follow');
 Route::get('main/get', 'main/get');
 // 获得反馈
 Route::get('admin/get_fmsg', 'admin/get_fmsg');
+// 删除反馈
+Route::post('admin/del_fmsg', 'admin/del_fmsg');
+Route::get('message/get_fmsg', 'message/get_fmsg');
 // 修改反馈状态
 Route::post('admin/edit_fmsg', 'admin/edit_fmsg');
 // 审核商品
@@ -115,6 +118,8 @@ Route::post('dynamic/add', 'dynamic/add');
 Route::get('dynamic/get', 'dynamic/get');
 
 Route::post('dynamic/delete', 'dynamic/delete');
+// 分享动态
+Route::post('dynamic/share', 'dynamic/share');
 
 // 举报
 Route::post('report/add', 'report/add');

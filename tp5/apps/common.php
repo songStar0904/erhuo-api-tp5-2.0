@@ -109,7 +109,9 @@ class Common extends Controller {
 				'sort' => 'chsDash',
 				'uid' => 'number',
 				'page' => 'number',
-				'num' => 'number'),
+				'num' => 'number',
+				'spread' => 'number',
+				'sold' => 'number'),
 			'get_one' => array(
 				'goods_id' => 'require|number',
 			),
@@ -203,7 +205,10 @@ class Common extends Controller {
 			),
 			'praise' => array(
 				'type' => 'require|number',
-				'mid' => 'require|number')),
+				'mid' => 'require|number'),
+			'get_fmsg' => array(),
+			'del_fmsg' => array(
+				'fmsg_id' => 'require|number')),
 		'Dynamic' => array(
 			'add' => array(
 				'content' => 'require|max:233',
@@ -213,7 +218,10 @@ class Common extends Controller {
 				'page' => 'number',
 				'num' => 'number'),
 			'delete' => array(
-				'id' => 'require|number')),
+				'id' => 'require|number'),
+			'share' => array(
+				'dynamic_content' => 'require|max:233',
+				'dynamic_lid' => 'require|number')),
 		'Report' => array(
 			'add' => array(
 				'report_type' => 'require|number',
@@ -589,8 +597,11 @@ class Common extends Controller {
 	}
 	public function get_one_dynamic($id) {
 		$join = [['erhuo_user u', 'u.user_id = d.dynamic_uid']];
-		$field = 'dynamic_id, dynamic_content, dynamic_time, dynamic_time, dynamic_type, dynamic_gid, dynamic_share, user_id, user_name, user_icon';
+		$field = 'dynamic_id, dynamic_content, dynamic_time, dynamic_time, dynamic_type, dynamic_gid, dynamic_lid, dynamic_share, user_id, user_name, user_icon';
 		$res = db('dynamic')->alias('d')->join($join)->field($field)->where('dynamic_id', $id)->find();
+		if ($res['dynamic_lid'] != 0) {
+			$res['children'] = $this->get_one_dynamic($res['dynamic_lid']);
+		}
 		if ($res) {
 			$res = $this->arrange_data($res, 'user');
 		}
