@@ -189,14 +189,19 @@ class User extends Common {
 	}
 	public function get_one() {
 		$data = $this->params;
-		$res = db('user')->where('user_id', $data['user_id'])->find();
+		if (is_numeric($data['user'])) {
+			$res = db('user')->where('user_id', $data['user'])->find();
+		} else {
+			$res = db('user')->where('user_name', $data['user'])->find();
+		}
+
 		if ($res == false) {
 			$this->return_msg(400, '未找到用户信息');
 		} else {
 			unset($res['user_psd']);
-			$res['ship'] = $this->get_ship($data['user_id']);
+			$res['ship'] = $this->get_ship($res['user_id']);
 			if (session('user_id')) {
-				$res['is_fans'] = $this->is_fans('user', $data['user_id'], session('user_id'));
+				$res['is_fans'] = $this->is_fans('user', $res['user_id'], session('user_id'));
 			}
 			$this->return_msg(200, '查询用户信息成功', $res);
 		}

@@ -54,7 +54,7 @@ class Goods extends Common {
 		}
 		$_db = db('goods')->where($params);
 		$_cdb = db('goods')->where($params);
-		if ($access == 0) {
+		if ($access !== 1 && !isset($params['goods_status'])) {
 			$_db = $_db->where('goods_status', '<>', 1);
 			$_cdb = $_cdb->where('goods_status', '<>', 1);
 		}

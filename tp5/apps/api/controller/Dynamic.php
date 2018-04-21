@@ -13,13 +13,13 @@ class Dynamic extends Common {
 		}
 		$uid = session('user_id');
 		$join = [['erhuo_user u', 'u.user_id = d.dynamic_uid']];
-		$field = 'dynamic_id, dynamic_content, dynamic_time, dynamic_time, dynamic_type, dynamic_gid, dynamic_share, user_id, user_name, user_icon';
+		$field = 'dynamic_id, dynamic_content, dynamic_time, dynamic_time, dynamic_type, dynamic_lid, dynamic_gid, dynamic_share, user_id, user_name, user_icon';
 		$_db = db('dynamic')->alias('d')->join($join)->field($field)->order('dynamic_time desc');
 		if ($data['type'] > 0 && $data['type'] < 3) {
 			$_db = $_db->where('dynamic_type', $data['type']);
 		}
 
-		if ($data['type'] > 2) {
+		if ($data['type'] == 3) {
 
 			$fans_id = $this->get_follower($uid);
 			$res = $_db->where('dynamic_uid', 'IN', function ($query) {
@@ -51,6 +51,10 @@ class Dynamic extends Common {
 				// 商品动态
 				if ($res[$key]['dynamic_type'] == 2 && $res[$key]['dynamic_gid'] !== 0) {
 					$res[$key]['goods'] = $this->get_one_goods($res[$key]['dynamic_gid'], 1);
+				}
+				// 转发动态
+				if ($res[$key]['dynamic_lid'] !== 0) {
+					$res[$key]['children'] = $this->get_one_dynamic($res[$key]['dynamic_lid']);
 				}
 			}
 			$this->return_msg(200, '查询动态成功', $res, $total);
@@ -93,14 +97,19 @@ class Dynamic extends Common {
 		$data = $this->params;
 		$data['dynamic_uid'] = $this->login_uid();
 		$data['dynamic_time'] = time();
-		$data['dynamic_type'] = $this->has_dynamic($data['dynamic_lid']);
+		$dynamic = $this->has_dynamic($data['dynamic_lid']);
+		// 分享的id
+		$dynamic_lid = $data['dynamic_lid'];
+		// 分享的根id
+		$data['dynamic_lid'] = $dynamic['dynamic_id'];
+		$data['dynamic_type'] = $dynamic['dynamic_type'];
 		$res = db('dynamic')->insert($data);
 		if (!$res) {
 			$this->return_msg(400, '分享动态失败');
 		} else {
 			$id = db('dynamic')->order('dynamic_time desc')->page(1, 1)->find()['dynamic_id'];
 			$res = $this->get_one_dynamic($id);
-			db('dynamic')->where('dynamic_id', $data['dynamic_lid'])->setInc('dynamic_share');
+			db('dynamic')->where('dynamic_id', $dynamic_lid)->setInc('dynamic_share');
 			$this->return_msg(200, '分享动态成功', $res);
 		}
 	}
@@ -113,9 +122,13 @@ class Dynamic extends Common {
 		}
 	}
 	public function has_dynamic($id) {
-		$res = db('dynamic')->where('dynamic_id', $id)->value('dynamic_type');
+		$res = db('dynamic')->where('dynamic_id', $id)->find();
 		if ($res) {
-			return $res;
+			if ($res['dynamic_lid'] == 0) {
+				return $res;
+			} else {
+				return $this->has_dynamic($res['dynamic_lid']);
+			}
 		} else {
 			$this->return_msg(400, '您的分享内容未找到');
 		}

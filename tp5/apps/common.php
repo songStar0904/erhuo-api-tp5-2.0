@@ -77,7 +77,7 @@ class Common extends Controller {
 			),
 			'get_one' => array(
 				'uid' => 'number',
-				'user_id' => 'require|number',
+				'user' => 'require',
 			),
 			'follow' => array(
 				'followers_id' => 'require|number',
@@ -230,7 +230,7 @@ class Common extends Controller {
 				'report_content' => 'max:255')));
 	protected function _initialize() {
 		parent::_initialize();
-		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Origin: www.erhuo.com");
 		header("Access-Control-Allow-Methods: GET, POST, DELETE, PUT, OPTIONS");
 		header("Access-Control-Allow-Credentials: true");
 		header("Access-Control-Allow-Headers: Content-Type, X-Requested-With, Cache-Control,accept");
@@ -603,7 +603,12 @@ class Common extends Controller {
 			$res['children'] = $this->get_one_dynamic($res['dynamic_lid']);
 		}
 		if ($res) {
-			$res = $this->arrange_data($res, 'user');
+			$res = $this->arrange_data($res, 'user'); // 必需放在前面 与后者格式user有冲突
+			// 商品动态
+			if ($res['dynamic_type'] == 2 && $res['dynamic_gid'] !== 0) {
+				$res['goods'] = $this->get_one_goods($res['dynamic_gid'], 1);
+			}
+
 		}
 		return $res;
 	}
