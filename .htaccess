@@ -1,8 +1,23 @@
-<IfModule mod_rewrite.c>
-  Options +FollowSymlinks -Multiviews
-  RewriteEngine On
 
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
+<IfModule mod_rewrite.c>
+RewriteEngine on
+  
+RewriteCond %{HTTP_HOST} ^api.erhuo.com$
+RewriteCond %{REQUEST_URI} !^/api/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /api/$1
+
+RewriteCond %{HTTP_HOST} ^api.erhuo.com$
+RewriteRule ^(/)?$ api/ [L] 
+
+RewriteCond %{HTTP_HOST} ^www.erhuo.com$
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+
+RewriteCond %{HTTP_HOST} ^www.erhuo.com$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
 </IfModule>
