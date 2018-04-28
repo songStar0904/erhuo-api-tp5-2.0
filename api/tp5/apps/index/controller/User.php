@@ -54,7 +54,7 @@ class User extends Common {
 			break;
 		}
 		$data['user_rtime'] = time(); // 注册时间
-		$data['user_icon'] = 'http://api.erhuo.com/public/uploads/user_icon/default' . rand(1, 9) . '.png';
+		$data['user_icon'] = '/api/public/uploads/user_icon/default' . rand(1, 9) . '.png';
 		$res = db('user')->insert($data);
 		if (!$res) {
 			$this->return_msg(400, '用户注册失败');

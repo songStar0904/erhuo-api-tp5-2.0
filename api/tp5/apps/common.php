@@ -389,7 +389,7 @@ class Common extends Controller {
 		$base_path = substr(ROOT_PATH, 0, strlen(ROOT_PATH) - 4);
 		$info = $file->move($base_path . 'public' . DS . 'uploads');
 		if ($info) {
-			$path = 'http://api.erhuo.com/public/uploads/' . $info->getSaveName();
+			$path = '/api/public/uploads/' . $info->getSaveName();
 			// 裁剪图片
 			// if (!empty($type)) {
 			// 	$this->image_edit($path, $type);

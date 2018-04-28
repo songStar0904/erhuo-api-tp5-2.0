@@ -196,6 +196,7 @@ class Goods extends Common {
 				->delete();
 		}
 		if ($res) {
+			db('dynamic')->where('dynamic_gid', $data['goods_id'])->delete();
 			$this->return_msg(200, '删除商品成功', $res);
 		} else {
 			$this->return_msg(400, '删除商品失败', '可能原因：您没有对此二货删除的权限');

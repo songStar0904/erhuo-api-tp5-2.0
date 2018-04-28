@@ -15,10 +15,15 @@ class Dynamic extends Common {
 		$join = [['erhuo_user u', 'u.user_id = d.dynamic_uid']];
 		$field = 'dynamic_id, dynamic_content, dynamic_time, dynamic_time, dynamic_type, dynamic_lid, dynamic_gid, dynamic_share, user_id, user_name, user_icon';
 		$_db = db('dynamic')->alias('d')->join($join)->field($field)->order('dynamic_time desc');
+		$c_db = db('dynamic')->alias('d')->join($join)->field($field)->order('dynamic_time desc');
 		if ($data['type'] > 0 && $data['type'] < 3) {
 			$_db = $_db->where('dynamic_type', $data['type']);
+			$c_db = $c_db->where('dynamic_type', $data['type']);
 		}
-
+		if (isset($data['uid'])) {
+			$_db = $_db->where('dynamic_uid', $data['uid']);
+			$c_db = $c_db->where('dynamic_uid', $data['uid']);
+		}
 		if ($data['type'] == 3) {
 
 			$fans_id = $this->get_follower($uid);
@@ -29,14 +34,7 @@ class Dynamic extends Common {
 		} else {
 			$res = $_db->page($data['page'], $data['num'])->select();
 		}
-
-		// ->chunk(100, function ($item) {
-		// 	foreach ($item as $key => $value) {
-		// 		$item[$key]['praise_num'] = db('praise')->where('praise_type=1 AND praise_mid=' . $value['dynamic_id'])->count();
-		// 		$item[$key]['is_praise'] = db('praise')->where('praise_type=1 AND praise_mid=' . $value['dynamic_id'] . 'AND praise_uid=' . $uid)->find();
-		// 	}
-		// })
-		$total = $_db->count();
+		$total = $c_db->count();
 		if ($res !== false) {
 			$res = $this->arrange_data($res, 'user');
 			foreach ($res as $key => $value) {
