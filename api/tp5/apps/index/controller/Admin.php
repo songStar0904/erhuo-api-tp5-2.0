@@ -63,4 +63,34 @@ class Admin extends Common {
 			$this->return_msg(400, '发送公告失败');
 		}
 	}
+	public function get_report(){
+		$data = $this->params;
+		if (!isset($data['page'])) {
+			$data['page'] = 1;
+		}
+		if (!isset($data['num'])) {
+			$data['num'] = 5;
+		}
+		$join = [['erhuo_user u', 'u.user_id = r.report_uid']];
+		$field = 'report_id, report_type, report_gid, report_reason, report_content, report_time, user_id, user_name, user_icon';
+		$_db = db('report')->alias('r')->join($join)->field($field)->page($data['page'], $data['num']);
+		$res = $_db->select();
+		$total = $_db->count();
+		if ($res) {
+			$res = $this->arrange_data($res, 'user');
+			foreach ($res as $key => $value) {
+				$type = $value['report_type'];
+				if ($type === 1) {
+					$res[$key]['child'] = $this->get_one_goods($value['report_gid'], 0);
+				} else if ($type === 2) {
+					$res[$key]['child'] = $this->get_lmsg($value['report_gid'], 0);
+				} else if ($type === 3) {
+					$res[$key]['child'] = $this->get_one_dynamic($value['report_gid']);
+				}
+			}
+			$this->return_msg(200, '获得举报成功', $res, $total);
+		} else {
+			$this->return_msg(400, '获得举报失败');
+		}
+	}
 }

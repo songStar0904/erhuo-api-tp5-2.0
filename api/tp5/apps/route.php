@@ -93,7 +93,8 @@ Route::get('message/get_fmsg', 'message/get_fmsg');
 Route::post('admin/edit_fmsg', 'admin/edit_fmsg');
 // 审核商品
 Route::post('admin/pass_goods', 'admin/pass_goods');
-
+// 获得举报
+Route::get('admin/get_report', 'admin/get_report');
 // 推广商品
 Route::post('admin/spread_goods', 'admin/spread_goods');
 // 发布公告

@@ -167,7 +167,10 @@ class Common extends Controller {
 			'send_notice' => array(
 				'notice_uid' => 'number',
 				'notice_content' => 'require',
-				'notice_time' => 'number')),
+				'notice_time' => 'number'),
+			'get_report'=>array(
+				'page'=>'number',
+				'num'=>'number')),
 		'Classify' => array(
 			'get' => array(
 				'type' => 'require'),
@@ -230,7 +233,7 @@ class Common extends Controller {
 				'report_content' => 'max:255')));
 	protected function _initialize() {
 		parent::_initialize();
-		header("Access-Control-Allow-Origin: http://localhost:3000");
+		header("Access-Control-Allow-Origin: *");
 		header("Access-Control-Allow-Methods: GET, POST, DELETE, PUT, OPTIONS");
 		header("Access-Control-Allow-Credentials: true");
 		header("Access-Control-Allow-Headers: Content-Type, X-Requested-With, Cache-Control,accept");
@@ -486,31 +489,40 @@ class Common extends Controller {
 	public function get_lmsg($id, $type) {
 		$join = [['erhuo_user s', 's.user_id = l.lmsg_sid'], ['erhuo_user r', 'r.user_id = l.lmsg_rid']];
 		$field = 'lmsg_id, lmsg_lid, lmsg_content,r.user_id as ruser_id,r.user_icon as ruser_icon,r.user_name as ruser_name,s.user_id as suser_id, s.user_name as suser_name, s.user_icon as suser_icon, lmsg_content, lmsg_star, lmsg_status, lmsg_time';
-		$res = db('lmsg')->alias('l')->join($join)->field($field)->where('lmsg_gid', $id)->order('lmsg_time desc')->select();
+		if ($type === 0) {
+			$iid = 'lmsg_id';
+		} else {
+			$iid ='lmsg_gid';
+		}
+		$res = db('lmsg')->alias('l')->join($join)->field($field)->where($iid, $id)->order('lmsg_time desc')->select();
 		$res = $this->arrange_data($res, 'ruser');
 		$res = $this->arrange_data($res, 'suser');
 		$data = [];
-		foreach ($res as $key => $value) {
-			if ($value['lmsg_lid'] === 0) {
-				$value['praise_num'] = $this->get_praise_num(0, $value['lmsg_id']);
-				$value['is_praise'] = $this->is_praise(0, $value['lmsg_id']);
-				array_push($data, $value);
+		if ($type !== 0) {
+			foreach ($res as $key => $value) {
+				if ($value['lmsg_lid'] === 0) {
+					$value['praise_num'] = $this->get_praise_num(0, $value['lmsg_id']);
+					$value['is_praise'] = $this->is_praise(0, $value['lmsg_id']);
+					array_push($data, $value);
+				}
 			}
-		}
-		foreach ($res as $key => $value) {
-			if ($value['lmsg_lid'] !== 0) {
-				foreach ($data as $k => $val) {
-					if ($value['lmsg_lid'] === $val['lmsg_id']) {
-						if (!isset($data[$k]['children'])) {
-							$data[$k]['children'] = [];
+			foreach ($res as $key => $value) {
+				if ($value['lmsg_lid'] !== 0) {
+					foreach ($data as $k => $val) {
+						if ($value['lmsg_lid'] === $val['lmsg_id']) {
+							if (!isset($data[$k]['children'])) {
+								$data[$k]['children'] = [];
+							}
+							array_push($data[$k]['children'], $value);
 						}
-						array_push($data[$k]['children'], $value);
 					}
 				}
 			}
+			return $data;
+		} else {
+			return $res[0];
 		}
-
-		return $data;
+		
 	}
 	// 获得点赞数量
 	public function get_praise_num($type, $mid) {
@@ -611,6 +623,9 @@ class Common extends Controller {
 
 		}
 		return $res;
+	}
+	public function get_one_comment($id){
+
 	}
 
 }
