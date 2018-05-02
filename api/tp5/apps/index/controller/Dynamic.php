@@ -20,20 +20,24 @@ class Dynamic extends Common {
 			$_db = $_db->where('dynamic_type', $data['type']);
 			$c_db = $c_db->where('dynamic_type', $data['type']);
 		}
-		if (isset($data['uid'])) {
-			$_db = $_db->where('dynamic_uid', $data['uid']);
-			$c_db = $c_db->where('dynamic_uid', $data['uid']);
-		}
 		if ($data['type'] == 3) {
 
 			$fans_id = $this->get_follower($uid);
-			$res = $_db->where('dynamic_uid', 'IN', function ($query) {
+			$_db = $_db->where('dynamic_uid', 'IN', function ($query)use($data) {
 				$uid = session('user_id');
 				$query->table('erhuo_userrship')->where('fans_id', $uid)->field('followers_id');
-			})->page($data['page'], $data['num'])->select();
+			})->page($data['page'], $data['num']);
+			$c_db = $c_db->where('dynamic_uid', 'IN', function ($query)use($data) {
+				$uid = session('user_id');
+				$query->table('erhuo_userrship')->where('fans_id', $uid)->field('followers_id');
+			})->page($data['page'], $data['num']);
 		} else {
-			$res = $_db->page($data['page'], $data['num'])->select();
+			if (isset($data['uid'])) {
+				$_db = $_db->where('dynamic_uid', $data['uid']);
+				$c_db = $c_db->where('dynamic_uid', $data['uid']);
+			}
 		}
+		$res = $_db->page($data['page'], $data['num'])->select();
 		$total = $c_db->count();
 		if ($res !== false) {
 			$res = $this->arrange_data($res, 'user');
