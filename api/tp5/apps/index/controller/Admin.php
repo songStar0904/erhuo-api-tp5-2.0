@@ -74,8 +74,13 @@ class Admin extends Common {
 		$join = [['erhuo_user u', 'u.user_id = r.report_uid']];
 		$field = 'report_id, report_type, report_gid, report_reason, report_content, report_time, user_id, user_name, user_icon';
 		$_db = db('report')->alias('r')->join($join)->field($field)->page($data['page'], $data['num']);
-		$res = $_db->select();
-		$total = $_db->count();
+		if ($data['type'] != 0) {
+			$res = $_db->where('report_type', $data['type'])->select();
+		    $total = $_db->where('report_type', $data['type'])->count();
+		} else {
+			$res = $_db->select();
+		    $total = $_db->count();
+		}
 		if ($res) {
 			$res = $this->arrange_data($res, 'user');
 			foreach ($res as $key => $value) {
@@ -90,7 +95,33 @@ class Admin extends Common {
 			}
 			$this->return_msg(200, '获得举报成功', $res, $total);
 		} else {
-			$this->return_msg(400, '获得举报失败');
+			$this->return_msg(400, '获得举报失败', $res);
+		}
+	}
+	public function del_report(){
+		$data = $this->params;
+		$res = db('report')->where('report_id', $data['report_id'])->delete();
+		if ($res !== false) {
+			$this->return_msg(200, '删除举报成功', $res);
+		} else {
+			$this->return_msg(400, '删除举报失败');
+		}
+	}
+	public function del_report_item(){
+		$data = $this->params;
+		$res = false;
+		if ($data['type'] == 1) {
+			$res = db('goods')->where('goods_id', $data['gid'])->delete();
+		} else if ($data['type'] == 2) {
+			$res = db('lmsg')->where('lmsg_id', $data['gid'])->delete();
+		} else if ($data['type'] == 3) {
+			$res = db('dynamic')->where('dynamic_id', $data['gid'])->delete();
+		}
+		if ($res !== false) {
+			db('report')->where('report_gid', $data['gid'])->where('report_type', $data['type'])->delete();
+			$this->return_msg(200, '删除成功', $res);
+		} else {
+			$this->return_msg(400, '删除失败');
 		}
 	}
 }

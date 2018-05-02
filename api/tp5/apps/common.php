@@ -170,7 +170,12 @@ class Common extends Controller {
 				'notice_time' => 'number'),
 			'get_report'=>array(
 				'page'=>'number',
-				'num'=>'number')),
+				'num'=>'number'),
+			'del_report'=>array(
+				'report_id'=>'require|number'),
+			'del_report_item'=>array(
+				'gid'=>'require|number',
+				'type'=>'require|number')),
 		'Classify' => array(
 			'get' => array(
 				'type' => 'require'),

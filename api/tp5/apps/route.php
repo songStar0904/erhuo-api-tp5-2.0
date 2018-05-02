@@ -95,6 +95,10 @@ Route::post('admin/edit_fmsg', 'admin/edit_fmsg');
 Route::post('admin/pass_goods', 'admin/pass_goods');
 // 获得举报
 Route::get('admin/get_report', 'admin/get_report');
+// 删除举报
+Route::post('admin/del_report', 'admin/del_report');
+// 删除举报的内容
+Route::post('admin/del_report_item', 'admin/del_report_item');
 // 推广商品
 Route::post('admin/spread_goods', 'admin/spread_goods');
 // 发布公告
