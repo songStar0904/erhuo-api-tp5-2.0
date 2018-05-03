@@ -124,4 +124,14 @@ class Admin extends Common {
 			$this->return_msg(400, '删除失败');
 		}
 	}
+	public function on_lock() {
+		$data = $this->params;
+		$uid = session('user_id');
+		$res = db('user')->where('user_id', $uid)->where('user_psd', $data['psd'])->where('user_access', 1)->find();
+		if ($res) {
+			$this->return_msg(200, '解锁成功成功', $res);
+		} else {
+			$this->return_msg(400, '解锁成功失败');
+		}
+	}
 }

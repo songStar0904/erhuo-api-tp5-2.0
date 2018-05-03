@@ -160,11 +160,15 @@ class Goods extends Common {
 	public function del_img() {
 		$data = $this->params;
 		//获取$url有效字段（去掉网址）
-		$str = substr($data['url'], 20); //$str = 'up/avatar/59b25bcfcaac6.jpg'
+		$str = substr('http://www.erhuo.com/api/public/uploads/20180503/5d07c620cd760dcf2dc9c7f14b88f73a.jpg', 20); //$str = 'up/avatar/59b25bcfcaac6.jpg'
 		//file文件路径
-		$filename = './' . $str;
+		$filename = '..' . $data['url'];
 		if (file_exists($filename)) {
-			$res = db('gicon')->where('gIcon_gid', $data['goods_id'])->where('gIcon_url', $data['url'])->delete();
+			if (isset($data['goods_id'])) {
+				$res = db('gicon')->where('gIcon_gid', $data['goods_id'])->where('gIcon_url', $data['url'])->delete();
+			} else {
+				$res = true;
+			}
 		} else {
 			$this->return_msg(400, '未找到图片');
 		}

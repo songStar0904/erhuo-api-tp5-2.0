@@ -139,7 +139,7 @@ class Common extends Controller {
 				'goods_icon' => 'require|image|fileSize:2000000|fileExt:jpg,png,bmp,jpeg',
 			),
 			'del_img' => array(
-				'goods_id' => 'require|number',
+				'goods_id' => 'number',
 				'url' => 'require',
 			),
 			'delete' => array(
@@ -175,7 +175,9 @@ class Common extends Controller {
 				'report_id'=>'require|number'),
 			'del_report_item'=>array(
 				'gid'=>'require|number',
-				'type'=>'require|number')),
+				'type'=>'require|number'),
+			'on_lock'=>array(
+				'psd'=>'require|length:32')),
 		'Classify' => array(
 			'get' => array(
 				'type' => 'require'),
@@ -238,7 +240,7 @@ class Common extends Controller {
 				'report_content' => 'max:255')));
 	protected function _initialize() {
 		parent::_initialize();
-		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Origin: http://localhost:8000");
 		header("Access-Control-Allow-Methods: GET, POST, DELETE, PUT, OPTIONS");
 		header("Access-Control-Allow-Credentials: true");
 		header("Access-Control-Allow-Headers: Content-Type, X-Requested-With, Cache-Control,accept");
