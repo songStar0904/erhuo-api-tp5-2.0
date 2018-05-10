@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2018-04-23 11:27:02
--- 服务器版本： 10.1.30-MariaDB
+-- Generation Time: May 06, 2018 at 10:22 AM
+-- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_dmsg`
+-- Table structure for table `erhuo_dmsg`
 --
 
 CREATE TABLE `erhuo_dmsg` (
@@ -42,7 +42,7 @@ CREATE TABLE `erhuo_dmsg` (
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_dynamic`
+-- Table structure for table `erhuo_dynamic`
 --
 
 CREATE TABLE `erhuo_dynamic` (
@@ -57,7 +57,7 @@ CREATE TABLE `erhuo_dynamic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='动态';
 
 --
--- 转存表中的数据 `erhuo_dynamic`
+-- Dumping data for table `erhuo_dynamic`
 --
 
 INSERT INTO `erhuo_dynamic` (`dynamic_id`, `dynamic_uid`, `dynamic_lid`, `dynamic_type`, `dynamic_gid`, `dynamic_content`, `dynamic_share`, `dynamic_time`) VALUES
@@ -89,12 +89,21 @@ INSERT INTO `erhuo_dynamic` (`dynamic_id`, `dynamic_uid`, `dynamic_lid`, `dynami
 (45, 2, 2, 1, 0, '恭喜 //@songstar: 恭喜金彪被重庆理工大学研究生院录取^_^', 0, 1524202146),
 (46, 2, 0, 2, 40, '我发布了一个二货，快来看看~', 0, 1524452736),
 (47, 2, 0, 2, 41, '我发布了一个二货，快来看看~', 0, 1524456321),
-(48, 2, 0, 2, 42, '我发布了一个二货，快来看看~', 0, 1524466138);
+(48, 2, 0, 2, 42, '我发布了一个二货，快来看看~', 0, 1524466138),
+(49, 2, 0, 2, 43, '我发布了一个二货，快来看看~', 0, 1524546074),
+(50, 6, 0, 2, 44, '我发布了一个二货，快来看看~', 0, 1524650836),
+(52, 6, 0, 2, 45, '我发布了一个二货，快来看看~', 0, 1524735344),
+(53, 13, 0, 2, 46, '我发布了一个二货，快来看看~', 0, 1525165723),
+(54, 13, 0, 2, 47, '我发布了一个二货，快来看看~', 0, 1525165811),
+(55, 13, 0, 2, 48, '我发布了一个二货，快来看看~', 0, 1525227313),
+(56, 2, 0, 2, 49, '我发布了一个二货，快来看看~', 0, 1525261950),
+(58, 2, 0, 2, 51, '我发布了一个二货，快来看看~', 0, 1525357709),
+(59, 5, 0, 2, 52, '我发布了一个二货，快来看看~', 0, 1525357837);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_fmsg`
+-- Table structure for table `erhuo_fmsg`
 --
 
 CREATE TABLE `erhuo_fmsg` (
@@ -106,7 +115,7 @@ CREATE TABLE `erhuo_fmsg` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='留言';
 
 --
--- 转存表中的数据 `erhuo_fmsg`
+-- Dumping data for table `erhuo_fmsg`
 --
 
 INSERT INTO `erhuo_fmsg` (`fmsg_id`, `fmsg_uid`, `fmsg_content`, `fmsg_time`, `fmsg_status`) VALUES
@@ -120,7 +129,7 @@ INSERT INTO `erhuo_fmsg` (`fmsg_id`, `fmsg_uid`, `fmsg_content`, `fmsg_time`, `f
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_gclassify`
+-- Table structure for table `erhuo_gclassify`
 --
 
 CREATE TABLE `erhuo_gclassify` (
@@ -129,7 +138,7 @@ CREATE TABLE `erhuo_gclassify` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `erhuo_gclassify`
+-- Dumping data for table `erhuo_gclassify`
 --
 
 INSERT INTO `erhuo_gclassify` (`gclassify_id`, `gclassify_name`) VALUES
@@ -144,7 +153,7 @@ INSERT INTO `erhuo_gclassify` (`gclassify_id`, `gclassify_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_gicon`
+-- Table structure for table `erhuo_gicon`
 --
 
 CREATE TABLE `erhuo_gicon` (
@@ -154,7 +163,7 @@ CREATE TABLE `erhuo_gicon` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `erhuo_gicon`
+-- Dumping data for table `erhuo_gicon`
 --
 
 INSERT INTO `erhuo_gicon` (`gIcon_id`, `gIcon_gid`, `gIcon_url`) VALUES
@@ -196,12 +205,24 @@ INSERT INTO `erhuo_gicon` (`gIcon_id`, `gIcon_gid`, `gIcon_url`) VALUES
 (53, 40, '/api/public/uploads/20180423/1f48148130bcbbbc65e4da123161b65f.jpeg'),
 (54, 40, '/api/public/uploads/20180423/031821d97bccd0b933983d80579683a6.jpeg'),
 (55, 41, '/api/public/uploads/20180423/dded99b0ed28bcfce29a5f26d5019e5b.jpg'),
-(56, 42, '/api/public/uploads/20180423/9090815e486fe603cbfd9111db6ef393.jpg');
+(56, 42, '/api/public/uploads/20180423/9090815e486fe603cbfd9111db6ef393.jpg'),
+(57, 43, '/api/public/uploads/20180424/e4be7bcf397ca8cf2bce75b70617449f.jpg'),
+(58, 44, '/api/public/uploads/20180425/9148abdce1fe744e9245584b723aeb6f.jpeg'),
+(59, 45, '/api/public/uploads/20180426/f31732c9a33cfa4d3c4af3929765de3c.png'),
+(60, 45, '/api/public/uploads/20180426/a0fc741ad7f298e616939864c11ddbb8.jpg'),
+(61, 46, '/api/public/uploads/20180501/ec57a63b9aef9b9e3e1d029b8e01e074.jpg'),
+(62, 47, '/api/public/uploads/20180501/ea6c61b90bf94d4aec119e4edb3c3a36.jpg'),
+(63, 47, '/api/public/uploads/20180501/b6f4ccfbf2216d0e0700a0114bf72fc8.jpg'),
+(64, 48, '/api/public/uploads/20180502/8545c323724322a52694eae8f2f1a347.png'),
+(65, 49, '/api/public/uploads/20180502/ea23d2cd0025a7b70a36872e966e8670.jpg'),
+(66, 49, '/api/public/uploads/20180502/ab9696da1b89118df77bdea45aea8c2d.jpg'),
+(68, 51, '/api/public/uploads/20180503/606a588fcc4fc52c55d370f63b50f9a4.jpg'),
+(69, 52, '/api/public/uploads/20180503/a214c9c34ce73cc4569360593f4b0b34.jpeg');
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_goods`
+-- Table structure for table `erhuo_goods`
 --
 
 CREATE TABLE `erhuo_goods` (
@@ -225,7 +246,7 @@ CREATE TABLE `erhuo_goods` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `erhuo_goods`
+-- Dumping data for table `erhuo_goods`
 --
 
 INSERT INTO `erhuo_goods` (`goods_id`, `goods_uid`, `goods_cid`, `goods_name`, `goods_status`, `goods_spread`, `goods_sell`, `goods_oprice`, `goods_nprice`, `goods_address`, `goods_type`, `goods_summary`, `phone`, `qq`, `wechat`, `goods_time`, `goods_view`) VALUES
@@ -241,28 +262,37 @@ INSERT INTO `erhuo_goods` (`goods_id`, `goods_uid`, `goods_cid`, `goods_name`, `
 (17, 1, 1, '小谈表情', 2, 0, 1, 1, 1, '小谈表情小谈表情', 0, '小谈表情小谈表情', '', NULL, '0songstar', 1519743129, 0),
 (18, 3, 4, '薄荷绿双肩包', 2, 0, 1, 50, 8, '北校区6区7栋615', 2, '春夏要来了，这个颜色可以说是非常清新了，学姐要毕业了，转手送学妹啊，请学姐喝杯奶茶就行ʚتɞ', '15574406224', 1043328710, '', 1521271843, 26),
 (19, 5, 8, '水乳', 2, 0, 1, 50, 30, '南校区2区2栋222', 2, '植物日记水乳套装\n去年九月份买的 闲置到现在 乳液有点少了\n ', '15573318829', 0, '', 1521643841, 28),
-(20, 2, 5, '鬼火摩托车', 0, 0, 1, 2600, 2000, '7区1栋222', 2, '上学期中期刚买的新车，进口鬼火入手时2600，到现在骑了不到四百公里。2000出手，全新，加油很给力。', '15574406229', 1043328710, '', 1522041292, 2),
+(20, 2, 5, '鬼火摩托车', 0, 0, 1, 2600, 2000, '7区1栋222', 2, '上学期中期刚买的新车，进口鬼火入手时2600，到现在骑了不到四百公里。2000出手，全新，加油很给力。', '15574406229', 1043328710, '', 1522041292, 4),
 (21, 4, 7, '风扇', 0, 0, 1, 45, 15, '6-7-616', 0, '宿舍用风扇，8成新，原价45，现价15，可讲价', '', 1043328710, '', 1522139168, 0),
 (25, 5, 1, '钱理群中国现代文学三十年', 0, 0, 1, 25, 15, '湖南科技大学北校区9教', 0, '钱理群的中国现代文学三十年，图书保存完好，考研很多大学都用这本的哦～有需要的学弟学妹们看过来～', '15573318829', 0, '', 1522142601, 2),
 (26, 5, 7, '电热饭盒', 0, 1, 1, 49, 29, '北校区十教学楼', 0, '可以煮面，热饭等等，原价49', '15573318829', 0, '', 1522406503, 2),
-(27, 5, 1, '《道德经》', 0, 1, 1, 50, 20, '樱花园', 0, '八成新', '15573318829', 0, '', 1522406975, 3),
-(28, 5, 8, '床上书桌', 2, 1, 1, 150, 80, '北校区6-7-616', 2, '原价150，只用了一个学期 无损坏，如果购买女生可以上门帮忙组装，也可以帮助送到您的寝室。', '15573318829', 0, '', 1522407687, 14),
+(27, 5, 1, '《道德经》', 0, 1, 1, 50, 20, '樱花园', 0, '八成新', '15573318829', 0, '', 1522406975, 5),
+(28, 5, 8, '床上书桌', 2, 1, 1, 150, 80, '北校区6-7-616', 2, '原价150，只用了一个学期 无损坏，如果购买女生可以上门帮忙组装，也可以帮助送到您的寝室。', '15573318829', 0, '', 1522407687, 15),
 (29, 6, 8, '眼镜框', 2, 0, 1, 50, 35, '6-7-616', 0, '从没带过，几乎全新，可以自配镜片，放着没用低价卖了。', '15673226596', 0, 'zohar', 1522824784, 8),
-(30, 6, 2, 'B.O.W 航式充电无线键盘', 2, 1, 1, 99, 50, '6-7-616', 2, '京东正品，只用了不到两天（聊天打字，其他没动过），说明书齐全，可验货，买了绝对不亏，办公绝佳搭档。想重买个机械键盘，所以低价出售。', '15673226596', 0, 'zohar', 1523254021, 3),
+(30, 6, 2, 'B.O.W 航式充电无线键盘', 2, 1, 1, 99, 50, '6-7-616', 2, '京东正品，只用了不到两天（聊天打字，其他没动过），说明书齐全，可验货，买了绝对不亏，办公绝佳搭档。想重买个机械键盘，所以低价出售。', '15673226596', 0, 'zohar', 1523254021, 5),
 (32, 6, 2, 'B.O.W 航式充电无线键盘', 3, 0, 1, 99, 50, '6-7-616', 2, '京东正品，只用了不到两天（聊天打字，其他没动过），说明书齐全，可验货，买了绝对不亏，办公绝佳搭档。想重买个机械键盘，所以低价出售。', '15673226596', 0, 'zohar', 1523254177, 0),
 (35, 6, 2, 'B.O.W 航式充电无线键盘', 1, 0, 1, 99, 50, '6-7-616', 2, '京东正品，只用了不到两天（聊天打字，其他没动过），说明书齐全，可验货，买了绝对不亏，办公绝佳搭档。想重买个机械键盘，所以低价出售。', '15673226596', 0, 'zohar', 1523254250, 3),
-(36, 11, 2, 'iphone 6 全包手机壳', 0, 0, 1, 20, 10, '6-7-616', 0, '一次买了好几个手机壳，这个一直没用过，全新未拆封（除了照相的时候打开了）', '15873071082', 0, '', 1523433828, 3),
+(36, 11, 2, 'iphone 6 全包手机壳', 0, 0, 1, 20, 10, '6-7-616', 0, '一次买了好几个手机壳，这个一直没用过，全新未拆封（除了照相的时候打开了）', '15873071082', 0, '', 1523433828, 4),
 (37, 12, 8, '出租steam绝地求生账号', 0, 0, 1, 98, 1, '', 1, '1块钱/小时 3块钱/天', '18173278986', 0, 'AnAn', 1523519785, 21),
 (38, 6, 7, '冰箱', 0, 0, 1, 400, 300, '6-7-616', 2, '用了两年多，制冷还是很给力！', '15673226596', 0, 'zohar', 1523972128, 1),
-(39, 2, 1, '考研英语词汇书', 0, 0, 1, 30, 15, '6-7-616', 0, '全新，大四毕业，闲置。', '15574406229', 1043328710, '', 1524152150, 4),
-(40, 2, 1, '最好的我们', 0, 0, 1, 30, 10, '6-7-616', 0, '书只看了一遍，有喜欢耿耿于淮的带走吧！两本十块', '15574406229', 1043328710, '', 1524452736, 0),
-(41, 2, 5, '求一辆死飞', 0, 0, 0, 500, 200, '6-7-616', 0, '最好八成新死飞，带大锁一把', '15574406229', 0, 'songstar', 1524456321, 12),
-(42, 2, 7, '风扇', 0, 0, 1, 30, 10, '6-7-671', 0, '夏天到了，你需要风扇and吊扇，大四学姐大甩卖，只要10块钱，10块钱你买不了吃亏，买不了上当，10块钱，清凉一夏', '15574406229', 1043328710, '', 1524466138, 12);
+(39, 2, 1, '考研英语词汇书', 0, 0, 1, 30, 15, '6-7-616', 0, '全新，大四毕业，闲置。', '15574406229', 1043328710, '', 1524152150, 5),
+(40, 2, 1, '最好的我们', 0, 1, 1, 30, 10, '6-7-616', 0, '书只看了一遍，有喜欢耿耿于淮的带走吧！两本十块', '15574406229', 1043328710, '', 1524452736, 1),
+(41, 2, 5, '求一辆死飞', 0, 0, 0, 500, 200, '6-7-616', 0, '最好八成新死飞，带大锁一把', '15574406229', 0, 'songstar', 1524456321, 13),
+(42, 2, 7, '风扇', 0, 1, 1, 30, 10, '6-7-671', 0, '夏天到了，你需要风扇and吊扇，大四学姐大甩卖，只要10块钱，10块钱你买不了吃亏，买不了上当，10块钱，清凉一夏', '15574406229', 1043328710, '', 1524466138, 17),
+(43, 2, 5, '摩托', 0, 0, 1, 2000, 1500, '6-7-616', 2, '买来没有几个月，八九成新，买之后送锁，有意向者私聊电话18216069821，图片是网上的，实物要好的多', '15574406229', 0, '', 1524546074, 7),
+(44, 6, 8, '可爱小蜥蜴', 0, 0, 1, 500, 100, '6-1-676', 0, '可爱小蜥蜴  冬暖夏凉', '15673226596', 0, '', 1524650836, 12),
+(45, 6, 8, '御泥坊口红（波尔多酒红）', 0, 0, 1, 99, 25, '6-1-761', 0, '御泥坊旗舰店买的，颜色不适合我，用过两三次，喜欢的小可爱带走吧！', '15673226596', 0, 'zohar', 1524735344, 7),
+(46, 13, 1, '小说 第三天堂', 0, 1, 1, 50, 10, '6-7-616', 0, '主打悬疑剧情，个人觉得很精彩，同时这也是本耽美小说。想看结局的也可以入。', '15200341651', 0, '', 1525165722, 0),
+(47, 13, 1, '英文读物', 0, 0, 1, 30, 10, '6-7-616', 2, '第一张图里，分别是《逃离》和《致D情史》，购自亚马逊海外图书。逃离是诺贝尔得奖作品，不多介绍。致D情史，简单的说就是一碗狗粮。 第二张图里，左边是一本英文童话，右边是电影相助的小说版，就是石头姐演的那部。', '15200341651', 0, '', 1525165811, 5),
+(48, 13, 1, '图书大甩卖', 0, 0, 1, 30, 15, '6-7-616', 2, '即将毕业，图书甩卖，三本书15元', '15200341651', 0, '', 1525227313, 0),
+(49, 2, 8, '行李箱', 0, 0, 1, 200, 100, '6-7-616', 2, '20寸:银色，可放15.6笔记本，长宽都有富余。箱子完好无损，上面的防护膜还没撕。大二购入，78成新的样子。售价90 24寸:款式比较老，质量不好。虽然只用过两次，但没注意保养，外表有污渍，内层有掉落，建议当做储物箱用。售价40 可随时联系看箱，可面谈议价', '15574406229', 0, '', 1525261950, 3),
+(51, 2, 8, '小桌子', 0, 0, 1, 15, 10, '6-7-616', 2, '8新，四肢健全，平衡感好', '15574406229', 0, '', 1525357709, 0),
+(52, 5, 4, 'puma板鞋', 0, 0, 1, 300, 200, '6-7-616', 2, '只穿过一次，买小了，手贱把吊牌拆了，36码（225mm）\n', '15573318829', 0, '', 1525357837, 0);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_goodsrship`
+-- Table structure for table `erhuo_goodsrship`
 --
 
 CREATE TABLE `erhuo_goodsrship` (
@@ -273,7 +303,7 @@ CREATE TABLE `erhuo_goodsrship` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `erhuo_goodsrship`
+-- Dumping data for table `erhuo_goodsrship`
 --
 
 INSERT INTO `erhuo_goodsrship` (`goodsrship`, `fans_id`, `followers_id`, `follower_time`) VALUES
@@ -294,7 +324,7 @@ INSERT INTO `erhuo_goodsrship` (`goodsrship`, `fans_id`, `followers_id`, `follow
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_grecord`
+-- Table structure for table `erhuo_grecord`
 --
 
 CREATE TABLE `erhuo_grecord` (
@@ -305,7 +335,7 @@ CREATE TABLE `erhuo_grecord` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品浏览记录';
 
 --
--- 转存表中的数据 `erhuo_grecord`
+-- Dumping data for table `erhuo_grecord`
 --
 
 INSERT INTO `erhuo_grecord` (`grecord_id`, `grecord_gid`, `grecord_uid`, `grecord_time`) VALUES
@@ -341,12 +371,18 @@ INSERT INTO `erhuo_grecord` (`grecord_id`, `grecord_gid`, `grecord_uid`, `grecor
 (32, 39, 11, 1524202421),
 (33, 38, 11, 1524204850),
 (34, 41, 2, 1524474260),
-(35, 42, 2, 1524467928);
+(35, 42, 2, 1524467928),
+(36, 43, 2, 1524546106),
+(37, 27, 2, 1524547064),
+(38, 45, 6, 1524736718),
+(39, 47, 14, 1525227019),
+(40, 49, 2, 1525338369),
+(41, 49, 14, 1525337329);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_lmsg`
+-- Table structure for table `erhuo_lmsg`
 --
 
 CREATE TABLE `erhuo_lmsg` (
@@ -363,7 +399,7 @@ CREATE TABLE `erhuo_lmsg` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='留言';
 
 --
--- 转存表中的数据 `erhuo_lmsg`
+-- Dumping data for table `erhuo_lmsg`
 --
 
 INSERT INTO `erhuo_lmsg` (`lmsg_id`, `lmsg_lid`, `lmsg_type`, `lmsg_sid`, `lmsg_rid`, `lmsg_gid`, `lmsg_content`, `lmsg_time`, `lmsg_status`, `lmsg_star`) VALUES
@@ -385,7 +421,7 @@ INSERT INTO `erhuo_lmsg` (`lmsg_id`, `lmsg_lid`, `lmsg_type`, `lmsg_sid`, `lmsg_
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_main`
+-- Table structure for table `erhuo_main`
 --
 
 CREATE TABLE `erhuo_main` (
@@ -397,7 +433,7 @@ CREATE TABLE `erhuo_main` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `erhuo_main`
+-- Dumping data for table `erhuo_main`
 --
 
 INSERT INTO `erhuo_main` (`main_id`, `main_gnum`, `main_unum`, `main_egnum`, `main_fnum`) VALUES
@@ -406,7 +442,7 @@ INSERT INTO `erhuo_main` (`main_id`, `main_gnum`, `main_unum`, `main_egnum`, `ma
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_notice`
+-- Table structure for table `erhuo_notice`
 --
 
 CREATE TABLE `erhuo_notice` (
@@ -419,7 +455,7 @@ CREATE TABLE `erhuo_notice` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `erhuo_notice`
+-- Dumping data for table `erhuo_notice`
 --
 
 INSERT INTO `erhuo_notice` (`notice_id`, `notice_uid`, `notice_lid`, `notice_title`, `notice_content`, `notice_time`) VALUES
@@ -455,7 +491,7 @@ INSERT INTO `erhuo_notice` (`notice_id`, `notice_uid`, `notice_lid`, `notice_tit
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_praise`
+-- Table structure for table `erhuo_praise`
 --
 
 CREATE TABLE `erhuo_praise` (
@@ -467,7 +503,7 @@ CREATE TABLE `erhuo_praise` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `erhuo_praise`
+-- Dumping data for table `erhuo_praise`
 --
 
 INSERT INTO `erhuo_praise` (`praise_id`, `praise_type`, `praise_mid`, `praise_uid`, `praise_time`) VALUES
@@ -492,12 +528,14 @@ INSERT INTO `erhuo_praise` (`praise_id`, `praise_type`, `praise_mid`, `praise_ui
 (24, 1, 31, 1, 1523442195),
 (25, 1, 33, 6, 1523972213),
 (26, 1, 40, 5, 1524031284),
-(27, 1, 44, 2, 1524201069);
+(27, 1, 44, 2, 1524201069),
+(28, 1, 45, 13, 1525245240),
+(29, 1, 2, 13, 1525245259);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_report`
+-- Table structure for table `erhuo_report`
 --
 
 CREATE TABLE `erhuo_report` (
@@ -511,7 +549,7 @@ CREATE TABLE `erhuo_report` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `erhuo_report`
+-- Dumping data for table `erhuo_report`
 --
 
 INSERT INTO `erhuo_report` (`report_id`, `report_type`, `report_gid`, `report_uid`, `report_reason`, `report_content`, `report_time`) VALUES
@@ -526,7 +564,7 @@ INSERT INTO `erhuo_report` (`report_id`, `report_type`, `report_gid`, `report_ui
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_search`
+-- Table structure for table `erhuo_search`
 --
 
 CREATE TABLE `erhuo_search` (
@@ -536,7 +574,7 @@ CREATE TABLE `erhuo_search` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `erhuo_search`
+-- Dumping data for table `erhuo_search`
 --
 
 INSERT INTO `erhuo_search` (`search_id`, `search_name`, `search_num`) VALUES
@@ -549,7 +587,7 @@ INSERT INTO `erhuo_search` (`search_id`, `search_name`, `search_num`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_user`
+-- Table structure for table `erhuo_user`
 --
 
 CREATE TABLE `erhuo_user` (
@@ -571,23 +609,25 @@ CREATE TABLE `erhuo_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `erhuo_user`
+-- Dumping data for table `erhuo_user`
 --
 
 INSERT INTO `erhuo_user` (`user_id`, `user_name`, `user_psd`, `user_phone`, `user_email`, `user_sid`, `user_sex`, `user_rtime`, `user_ltime`, `user_lntime`, `user_icon`, `user_ip`, `user_sign`, `user_access`, `user_pop`) VALUES
-(1, '二货官方', 'e10adc3949ba59abbe56e057f20f883e', '15574406224', '1043328710@qq.com', 448, 'male', 1519794623, 1524143442, 1524146091, '/api/public/uploads/20180308/0c7d58a57bff751dcc55d36d68c6de33.jpg', '127.0.0.1', '欢迎光临西西书店，有事可以电话联系15152013154', 1, 56),
-(2, 'songstar', 'e10adc3949ba59abbe56e057f20f883e', '15574406229', '', 448, 'male', 1519794623, 1524473449, 1524474330, '/api/public/uploads/20180420/e3c188900f4609840b4adb98fca7bc45.jpg', '127.0.0.1', '我是猪', 0, 44),
+(1, '二货官方', 'e10adc3949ba59abbe56e057f20f883e', '15574406224', '1043328710@qq.com', 448, 'male', 1519794623, 1524651160, 1524651102, '/api/public/uploads/20180425/350679801be42598ac8a1cfc93296efb.jpg', '61.151.226.67', '欢迎光临西西书店，有事可以电话联系15152013154', 1, 56),
+(2, 'songstar', 'e10adc3949ba59abbe56e057f20f883e', '15574406229', '', 448, 'male', 1519794623, 1525338303, 1525357385, '/api/public/uploads/20180420/e3c188900f4609840b4adb98fca7bc45.jpg', '119.39.248.9', '我是猪', 0, 56),
 (3, 'admin@amare', 'e10adc3949ba59abbe56e057f20f883e', '', 'admin@amare.cc', 1, 'female', 1519706734, 1521700947, 1521715050, '/api/public/uploads/user_icon/default8.png', '127.0.0.1', '', 0, 15),
 (4, '兰兰', 'e10adc3949ba59abbe56e057f20f883e', '18173278879', '', 59, 'female', 1520486498, 1522139043, 0, '/api/public/uploads/user_icon/default7.png', '127.0.0.1', '', 0, 8),
-(5, '王玥', 'e10adc3949ba59abbe56e057f20f883e', '15573318829', '', 448, 'female', 1521647852, 1524031145, 1524036626, '/api/public/uploads/user_icon/default4.png', '127.0.0.1', '我是王玥..巴拉巴拉', 0, 36),
-(6, '吴志豪', 'e10adc3949ba59abbe56e057f20f883e', '15673226596', '', 448, 'male', 1522822389, 1523972064, 1523977357, '/api/public/uploads/user_icon/default7.png', '127.0.0.1', '', 0, 22),
+(5, '王玥', 'e10adc3949ba59abbe56e057f20f883e', '15573318829', '', 448, 'female', 1521647852, 1525357758, 1525357759, '/api/public/uploads/user_icon/default4.png', '110.53.129.76', '我是王玥..巴拉巴拉', 0, 36),
+(6, '吴志豪', 'e10adc3949ba59abbe56e057f20f883e', '15673226596', '', 448, 'male', 1522822389, 1524734682, 1524736718, '/api/public/uploads/20180426/9e580ac6a5d38cdcb2f9150285e9c792.jpg', '61.151.178.165', '', 0, 33),
 (11, '刘滔', 'e10adc3949ba59abbe56e057f20f883e', NULL, '1478265495@qq.com', 448, 'male', 1523329747, 1524202179, 1524204850, '/api/public/uploads/user_icon/default6.png', '127.0.0.1', '', 0, 15),
-(12, '18173278986', 'e10adc3949ba59abbe56e057f20f883e', '18173278986', '', 448, 'male', 1523449621, 1523519663, 1523520063, '/api/public/uploads/user_icon/default8.png', '127.0.0.1', '', 0, 3);
+(12, '18173278986', 'e10adc3949ba59abbe56e057f20f883e', '18173278986', '', 448, 'male', 1523449621, 1523519663, 1523520063, '/api/public/uploads/user_icon/default8.png', '127.0.0.1', '', 0, 3),
+(13, '白生大人', 'e10adc3949ba59abbe56e057f20f883e', '15200341651', '', 448, 'male', 1525165235, 1525165340, 1525260956, '/api/public/uploads/20180501/07762e00fd4b33def47e6600018b0d6c.jpg', '110.52.124.152', '', 0, 14),
+(14, '起风了', 'e10adc3949ba59abbe56e057f20f883e', NULL, '1026374981@qq.com', 448, 'male', 1525225041, 1525337182, 1525337329, '/api/public/uploads/user_icon/default3.png', '119.39.248.9', '', 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `erhuo_userrship`
+-- Table structure for table `erhuo_userrship`
 --
 
 CREATE TABLE `erhuo_userrship` (
@@ -598,7 +638,7 @@ CREATE TABLE `erhuo_userrship` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `erhuo_userrship`
+-- Dumping data for table `erhuo_userrship`
 --
 
 INSERT INTO `erhuo_userrship` (`usership_id`, `fans_id`, `followers_id`, `follower_time`) VALUES
@@ -617,7 +657,10 @@ INSERT INTO `erhuo_userrship` (`usership_id`, `fans_id`, `followers_id`, `follow
 (137, 11, 11, 1524203366),
 (138, 11, 2, 1524203383),
 (139, 2, 5, 1524452840),
-(145, 2, 2, 1524467927);
+(145, 2, 2, 1524467927),
+(146, 6, 2, 1524735444),
+(147, 13, 2, 1525244911),
+(148, 14, 2, 1525337328);
 
 --
 -- Indexes for dumped tables
@@ -729,125 +772,125 @@ ALTER TABLE `erhuo_userrship`
   ADD KEY `followers_id` (`followers_id`);
 
 --
--- 在导出的表使用AUTO_INCREMENT
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- 使用表AUTO_INCREMENT `erhuo_dmsg`
+-- AUTO_INCREMENT for table `erhuo_dmsg`
 --
 ALTER TABLE `erhuo_dmsg`
   MODIFY `dmsg_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- 使用表AUTO_INCREMENT `erhuo_dynamic`
+-- AUTO_INCREMENT for table `erhuo_dynamic`
 --
 ALTER TABLE `erhuo_dynamic`
-  MODIFY `dynamic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `dynamic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
--- 使用表AUTO_INCREMENT `erhuo_fmsg`
+-- AUTO_INCREMENT for table `erhuo_fmsg`
 --
 ALTER TABLE `erhuo_fmsg`
   MODIFY `fmsg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- 使用表AUTO_INCREMENT `erhuo_gclassify`
+-- AUTO_INCREMENT for table `erhuo_gclassify`
 --
 ALTER TABLE `erhuo_gclassify`
   MODIFY `gclassify_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- 使用表AUTO_INCREMENT `erhuo_gicon`
+-- AUTO_INCREMENT for table `erhuo_gicon`
 --
 ALTER TABLE `erhuo_gicon`
-  MODIFY `gIcon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `gIcon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
--- 使用表AUTO_INCREMENT `erhuo_goods`
+-- AUTO_INCREMENT for table `erhuo_goods`
 --
 ALTER TABLE `erhuo_goods`
-  MODIFY `goods_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `goods_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- 使用表AUTO_INCREMENT `erhuo_goodsrship`
+-- AUTO_INCREMENT for table `erhuo_goodsrship`
 --
 ALTER TABLE `erhuo_goodsrship`
   MODIFY `goodsrship` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- 使用表AUTO_INCREMENT `erhuo_grecord`
+-- AUTO_INCREMENT for table `erhuo_grecord`
 --
 ALTER TABLE `erhuo_grecord`
-  MODIFY `grecord_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `grecord_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- 使用表AUTO_INCREMENT `erhuo_lmsg`
+-- AUTO_INCREMENT for table `erhuo_lmsg`
 --
 ALTER TABLE `erhuo_lmsg`
   MODIFY `lmsg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- 使用表AUTO_INCREMENT `erhuo_notice`
+-- AUTO_INCREMENT for table `erhuo_notice`
 --
 ALTER TABLE `erhuo_notice`
   MODIFY `notice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- 使用表AUTO_INCREMENT `erhuo_praise`
+-- AUTO_INCREMENT for table `erhuo_praise`
 --
 ALTER TABLE `erhuo_praise`
-  MODIFY `praise_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `praise_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- 使用表AUTO_INCREMENT `erhuo_report`
+-- AUTO_INCREMENT for table `erhuo_report`
 --
 ALTER TABLE `erhuo_report`
   MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- 使用表AUTO_INCREMENT `erhuo_search`
+-- AUTO_INCREMENT for table `erhuo_search`
 --
 ALTER TABLE `erhuo_search`
   MODIFY `search_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- 使用表AUTO_INCREMENT `erhuo_user`
+-- AUTO_INCREMENT for table `erhuo_user`
 --
 ALTER TABLE `erhuo_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- 使用表AUTO_INCREMENT `erhuo_userrship`
+-- AUTO_INCREMENT for table `erhuo_userrship`
 --
 ALTER TABLE `erhuo_userrship`
-  MODIFY `usership_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+  MODIFY `usership_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
--- 限制导出的表
+-- Constraints for dumped tables
 --
 
 --
--- 限制表 `erhuo_gicon`
+-- Constraints for table `erhuo_gicon`
 --
 ALTER TABLE `erhuo_gicon`
   ADD CONSTRAINT `erhuo_gicon_ibfk_1` FOREIGN KEY (`gIcon_gid`) REFERENCES `erhuo_goods` (`goods_id`) ON DELETE CASCADE;
 
 --
--- 限制表 `erhuo_goods`
+-- Constraints for table `erhuo_goods`
 --
 ALTER TABLE `erhuo_goods`
   ADD CONSTRAINT `erhuo_goods_ibfk_1` FOREIGN KEY (`goods_cid`) REFERENCES `erhuo_gclassify` (`gclassify_id`),
   ADD CONSTRAINT `erhuo_goods_ibfk_2` FOREIGN KEY (`goods_uid`) REFERENCES `erhuo_user` (`user_id`);
 
 --
--- 限制表 `erhuo_goodsrship`
+-- Constraints for table `erhuo_goodsrship`
 --
 ALTER TABLE `erhuo_goodsrship`
-  ADD CONSTRAINT `erhuo_goodsrship_ibfk_1` FOREIGN KEY (`fans_id`) REFERENCES `erhuo_user` (`user_id`),
-  ADD CONSTRAINT `erhuo_goodsrship_ibfk_2` FOREIGN KEY (`followers_id`) REFERENCES `erhuo_goods` (`goods_id`);
+  ADD CONSTRAINT `erhuo_goodsrship_ibfk_1` FOREIGN KEY (`fans_id`) REFERENCES `erhuo_user` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `erhuo_goodsrship_ibfk_2` FOREIGN KEY (`followers_id`) REFERENCES `erhuo_goods` (`goods_id`) ON DELETE CASCADE;
 
 --
--- 限制表 `erhuo_userrship`
+-- Constraints for table `erhuo_userrship`
 --
 ALTER TABLE `erhuo_userrship`
   ADD CONSTRAINT `erhuo_userrship_ibfk_1` FOREIGN KEY (`fans_id`) REFERENCES `erhuo_user` (`user_id`),

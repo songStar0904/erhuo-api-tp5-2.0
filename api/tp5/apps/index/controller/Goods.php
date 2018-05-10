@@ -5,6 +5,7 @@ use think\db;
 class Goods extends Common {
 	public function add() {
 		$data = $this->params;
+		$data['goods_uid'] = $this->login_uid();
 		$data['goods_time'] = time();
 		$res = db('goods')->insertGetId($data);
 		if (!$res) {
@@ -17,6 +18,7 @@ class Goods extends Common {
 			}
 			$goods = $this->get_one_goods($res, 1);
 			$this->dynamic_by_goods($goods);
+			$this->add_pop($data['goods_uid'], 5);
 			$this->return_msg(200, '添加商品成功', $data);
 		}
 	}
@@ -71,6 +73,9 @@ class Goods extends Common {
 		if ($has_search) {
 			$_db = $_db->where('goods_name', 'like', '%' . $data['search'] . '%');
 			$_cdb = $_cdb->where('goods_name', 'like', '%' . $data['search'] . '%');
+			if ($data['search']) {
+				$this->add_search($data['search']);
+			}
 		}
 		$res = $_db->alias('g')->join($join)->field($field)->order($sort . ' desc')->page($data['page'], $data['num'])->select();
 		$total = $_cdb->count();
@@ -258,6 +263,57 @@ class Goods extends Common {
 			$this->return_msg(200, '查询热搜成功', $res);
 		} else {
 			$this->return_msg(400, '查询热搜失败', $res);
+		}
+	}
+	public function get_usearch() {
+		$data = $this->params;
+		if (!isset($data['num'])) {
+			$data['num'] = 5;
+		}
+		$uid = session('user_id');
+		$res = false;
+		if ($uid) {
+			$res = db('usearch')->where('usearch_uid', $uid)->order('usearch_time desc')->page(1, $data['num'])->select();
+		}
+		if (!$res) {
+			$goods = db('goods')->order('goods_view desc')->page(1, $data['num'])->where('goods_status = 0 or goods_status = 2')->select();
+			$res = [];
+			foreach ($goods as $key => $value) {
+				$res[$key]['usearch_name'] = $value['goods_name'];
+			}
+		}
+		if ($res !== false) {
+			$this->return_msg(200, '获得用户搜索成功', $res);
+		} else {
+			$this->return_msg(400, '获得用户搜索失败', $res);
+		}
+	}
+	public function add_search($search) {
+		$data = array(
+			'search_name' => $search,
+		);
+		$uid = session('user_id');
+		if ($uid) {
+			$this->add_usearch($uid, $search);
+		}
+		$has_search = db('search')->where($data)->find();
+		if ($has_search) {
+			$res = db('search')->where($data)->setInc('search_num', 1);
+		} else {
+			$res = db('search')->insert($data);
+		}
+	}
+	public function add_usearch($uid, $search) {
+		$params = array(
+			'usearch_name' => $search,
+			'usearch_uid' => $uid,
+		);
+		$has = db('usearch')->where($params)->find();
+		$params['usearch_time'] = time();
+		if ($has) {
+			$res = db('usearch')->where('usearch_uid', $uid)->where('usearch_name', $search)->setField('usearch_time', $params['usearch_time']);
+		} else {
+			$res = db('usearch')->insert($params);
 		}
 	}
 }

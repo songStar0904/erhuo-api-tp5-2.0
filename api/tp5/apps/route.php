@@ -70,7 +70,8 @@ Route::post('goods/delete', 'goods/delete');
 Route::post('goods/follow', 'goods/follow');
 // 获得热搜
 Route::get('goods/get_hot', 'goods/get_hot');
-
+// 获得用户搜索
+Route::get('goods/get_usearch', 'goods/get_usearch');
 // 获取分类
 Route::get('classify/get', 'classify/get');
 // 添加分类
@@ -104,7 +105,7 @@ Route::post('admin/spread_goods', 'admin/spread_goods');
 // 发布公告
 Route::post('admin/send_notice', 'admin/send_notice');
 // 解锁
-Route::post('admin/on_lock', 'admin/on_lock'); 
+Route::post('admin/on_lock', 'admin/on_lock');
 // 发表评论/留言/回复
 Route::post('message/send', 'message/send');
 // 点赞

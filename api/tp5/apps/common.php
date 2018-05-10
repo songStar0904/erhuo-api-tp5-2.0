@@ -148,6 +148,9 @@ class Common extends Controller {
 			'get_hot' => array(
 				'num' => 'require|number',
 			),
+			'get_usearch' => array(
+				'num' => 'number',
+			),
 		),
 		'Main' => array(
 			'get' => array()),
@@ -168,16 +171,16 @@ class Common extends Controller {
 				'notice_uid' => 'number',
 				'notice_content' => 'require',
 				'notice_time' => 'number'),
-			'get_report'=>array(
-				'page'=>'number',
-				'num'=>'number'),
-			'del_report'=>array(
-				'report_id'=>'require|number'),
-			'del_report_item'=>array(
-				'gid'=>'require|number',
-				'type'=>'require|number'),
-			'on_lock'=>array(
-				'psd'=>'require|length:32')),
+			'get_report' => array(
+				'page' => 'number',
+				'num' => 'number'),
+			'del_report' => array(
+				'report_id' => 'require|number'),
+			'del_report_item' => array(
+				'gid' => 'require|number',
+				'type' => 'require|number'),
+			'on_lock' => array(
+				'psd' => 'require|length:32')),
 		'Classify' => array(
 			'get' => array(
 				'type' => 'require'),
@@ -453,6 +456,7 @@ class Common extends Controller {
 				$res = db($type . 'rship')->where('fans_id', $fans_id)
 					->where('followers_id', $followers_id)
 					->delete();
+				$this->add_pop($fans_id, -3);
 			} else {
 				$msg = '关注';
 				$result = true;
@@ -460,6 +464,7 @@ class Common extends Controller {
 				$data['followers_id'] = $followers_id;
 				$data['follower_time'] = time();
 				$res = db($type . 'rship')->insert($data);
+				$this->add_pop($fans_id, 3);
 			}
 			if ($res) {
 				$this->return_msg(200, $msg . '成功', $result);
@@ -499,7 +504,7 @@ class Common extends Controller {
 		if ($type === 0) {
 			$iid = 'lmsg_id';
 		} else {
-			$iid ='lmsg_gid';
+			$iid = 'lmsg_gid';
 		}
 		$res = db('lmsg')->alias('l')->join($join)->field($field)->where($iid, $id)->order('lmsg_time desc')->select();
 		$res = $this->arrange_data($res, 'ruser');
@@ -529,7 +534,7 @@ class Common extends Controller {
 		} else {
 			return $res[0];
 		}
-		
+
 	}
 	// 获得点赞数量
 	public function get_praise_num($type, $mid) {
@@ -588,6 +593,8 @@ class Common extends Controller {
 		$res = db('dynamic')->insert($params);
 		if (!$res) {
 			$this->return_msg(400, '发布动态失败');
+		} else {
+			$this->add_pop($params['dynamic_uid'], 3);
 		}
 	}
 	// 获取单个商品
@@ -631,8 +638,10 @@ class Common extends Controller {
 		}
 		return $res;
 	}
-	public function get_one_comment($id){
-
+	public function add_pop($uid, $num) {
+		$res = db('user')->where('user_id', $uid)->setInc('user_pop', $num);
+		if (!$res) {
+			$this->return_msg(400, '增加人气值失败');
+		}
 	}
-
 }

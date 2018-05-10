@@ -14,6 +14,8 @@ class Report extends Common {
 			if (!$res) {
 				$this->return_msg(400, '举报失败');
 			} else {
+				// 举报加2
+				$this->add_pop($data['report_uid'], 2);
 				$this->return_msg(200, '举报成功', $res);
 			}
 		}

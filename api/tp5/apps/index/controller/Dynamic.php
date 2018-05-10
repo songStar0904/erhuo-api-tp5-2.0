@@ -23,11 +23,11 @@ class Dynamic extends Common {
 		if ($data['type'] == 3) {
 
 			$fans_id = $this->get_follower($uid);
-			$_db = $_db->where('dynamic_uid', 'IN', function ($query)use($data) {
+			$_db = $_db->where('dynamic_uid', 'IN', function ($query) use ($data) {
 				$uid = session('user_id');
 				$query->table('erhuo_userrship')->where('fans_id', $uid)->field('followers_id');
 			})->page($data['page'], $data['num']);
-			$c_db = $c_db->where('dynamic_uid', 'IN', function ($query)use($data) {
+			$c_db = $c_db->where('dynamic_uid', 'IN', function ($query) use ($data) {
 				$uid = session('user_id');
 				$query->table('erhuo_userrship')->where('fans_id', $uid)->field('followers_id');
 			})->page($data['page'], $data['num']);
@@ -77,6 +77,7 @@ class Dynamic extends Common {
 		} else {
 			$id = db('dynamic')->order('dynamic_time desc')->page(1, 1)->find()['dynamic_id'];
 			$res = $this->get_one_dynamic($id);
+			$this->add_pop($params['dynamic_uid'], 3);
 			$this->return_msg(200, '发布动态成功', $res);
 		}
 	}
@@ -112,6 +113,7 @@ class Dynamic extends Common {
 			$id = db('dynamic')->order('dynamic_time desc')->page(1, 1)->find()['dynamic_id'];
 			$res = $this->get_one_dynamic($id);
 			db('dynamic')->where('dynamic_id', $dynamic_lid)->setInc('dynamic_share');
+			$this->add_pop($params['dynamic_uid'], 2);
 			$this->return_msg(200, '分享动态成功', $res);
 		}
 	}

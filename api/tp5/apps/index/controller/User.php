@@ -252,9 +252,9 @@ class User extends Common {
 		$fans_num = db('userrship')->where('fans_id', $uid)->count();
 		$followers_num = db('userrship')->field('followers_id')->where('followers_id', $uid)->count();
 		$sell_num = db('goods')->where('goods_uid', $uid)->count();
-		$pop = $fans_num * 5 + $followers_num * 2 + $sell_num * 3;
-		$res['pop'] = $pop;
-		db('user')->where('user_id', $uid)->setField('user_pop', $pop);
+		// $pop = $fans_num * 5 + $followers_num * 2 + $sell_num * 3;
+		// $res['pop'] = $pop;
+		// db('user')->where('user_id', $uid)->setField('user_pop', $pop);
 		$res['fans_num'] = $fans_num;
 		$res['followers_num'] = $followers_num;
 		$res['sell_num'] = $sell_num;

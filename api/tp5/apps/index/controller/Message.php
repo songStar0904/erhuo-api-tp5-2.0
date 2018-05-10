@@ -25,6 +25,8 @@ class Message extends Common {
 			if ($params['lmsg_lid'] !== 0) {
 				db('lmsg')->where('lmsg_id', $params['lmsg_lid'])->setField('lmsg_status', 2);
 			}
+			// 增加留言+2
+			$this->add_pop($params['lmsg_sid'], 2);
 			$this->return_msg(200, '留言成功', $params);
 		}
 	}
@@ -134,10 +136,12 @@ class Message extends Common {
 		if ($is_praised) {
 			$res = db('praise')->where('praise_id', $is_praised['praise_id'])->delete();
 			$msg = '取消点赞';
+			$this->add_pop($uid, -2);
 		} else {
 			$params['praise_time'] = time();
 			$res = db('praise')->insert($params);
 			$msg = '点赞成功';
+			$this->add_pop($uid, 2);
 		}
 		if (!$res) {
 			$this->return_msg(400, '点赞失败');
