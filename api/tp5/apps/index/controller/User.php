@@ -15,12 +15,12 @@ class User extends Common {
 			$this->return_msg(400, '密码不正确');
 		} else {
 			$update = $this->update_login($db_res['user_id']);
-			$db_res['user_ltime'] = $update['user_ltime'];
-			$db_res['user_ip'] = $update['user_ip'];
+			// $db_res['user_ltime'] = $update['user_ltime'];
+			// $db_res['user_ip'] = $update['user_ip'];
+			$db_res['user_ip'] = $this->get_ip_location($db_res['user_ip']);
 			unset($db_res['user_psd']);
 			session('user_id', $db_res['user_id']);
 			session('user_access', $db_res['user_access']);
-
 			$db_res['ship'] = $this->get_ship($db_res['user_id']);
 			$this->return_msg(200, '登录成功', $db_res);
 		}
@@ -203,6 +203,7 @@ class User extends Common {
 			if (session('user_id')) {
 				$res['is_fans'] = $this->is_fans('user', $res['user_id'], session('user_id'));
 			}
+			$res['user_ip'] = $this->get_ip_location($res['user_ip']);
 			$this->return_msg(200, '查询用户信息成功', $res);
 		}
 	}
@@ -254,7 +255,7 @@ class User extends Common {
 		$sell_num = db('goods')->where('goods_uid', $uid)->count();
 		// $pop = $fans_num * 5 + $followers_num * 2 + $sell_num * 3;
 		// $res['pop'] = $pop;
-		// db('user')->where('user_id', $uid)->setField('user_pop', $pop);
+		// db('user')->where('user_id', $uid)->setField('user_pop', $pop);->setInc('score', 5);
 		$res['fans_num'] = $fans_num;
 		$res['followers_num'] = $followers_num;
 		$res['sell_num'] = $sell_num;

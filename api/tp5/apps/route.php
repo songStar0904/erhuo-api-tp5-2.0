@@ -108,6 +108,8 @@ Route::post('admin/send_notice', 'admin/send_notice');
 Route::post('admin/on_lock', 'admin/on_lock');
 // 发表评论/留言/回复
 Route::post('message/send', 'message/send');
+// 获得未读消息数目
+Route::get('message/get_count', 'message/get_count');
 // 点赞
 Route::post('message/praise', 'message/praise');
 // 获得消息/数量
@@ -123,6 +125,7 @@ Route::delete('message/delete', 'message/delete');
 Route::post('dynamic/add', 'dynamic/add');
 
 Route::get('dynamic/get', 'dynamic/get');
+Route::get('dynamic/get_one', 'dynamic/get_one');
 
 Route::post('dynamic/delete', 'dynamic/delete');
 // 分享动态

@@ -51,9 +51,6 @@ class Goods extends Common {
 		if (isset($data['spread']) && $data['spread'] == 1) {
 			$params['goods_spread'] = 1;
 		}
-		if (isset($data['sold']) && $data['sold'] == 1) {
-			$params['goods_status'] = 3;
-		}
 		if (isset($data['buy']) && $data['buy'] == 1) {
 			$params['goods_sell'] = 0;
 		}
@@ -146,7 +143,7 @@ class Goods extends Common {
 			}
 			// 收藏 留言
 			$res['fans_num'] = db('goodsrship')->where('followers_id', $res['goods_id'])->count();
-			$res['goods_lmsg'] = $this->get_lmsg($data['goods_id'], 'goods');
+			$res['goods_lmsg'] = $this->get_msg($data['goods_id'], 'goods');
 			$this->return_msg(200, '查询商品成功', $res);
 		} else {
 			$this->return_msg(400, '查询商品失败', $res);

@@ -59,7 +59,9 @@ class Common extends Controller {
 			'edit' => array(
 				'user_id' => 'require|number',
 				'user_name' => 'max:20',
-				'user_sign' => 'max:255'),
+				'user_sign' => 'max:255',
+				'user_wechat' => 'min:6|max: 20',
+				'user_qq' => 'max:11'),
 			'send_fmsg' => array(
 				'fmsg_uid' => 'require|number',
 				'fmsg_content' => 'require|max:255'),
@@ -204,6 +206,7 @@ class Common extends Controller {
 			'get' => array(
 				'type' => 'require',
 				'status' => 'require|number'),
+			'get_count' => array(),
 			'get_by_id' => array(
 				'type' => 'require',
 				'gid' => 'require|number'),
@@ -230,6 +233,8 @@ class Common extends Controller {
 				'type' => 'require|number',
 				'page' => 'number',
 				'num' => 'number'),
+			'get_one' => array(
+				'id' => 'require|number'),
 			'delete' => array(
 				'id' => 'require|number'),
 			'share' => array(
@@ -435,6 +440,36 @@ class Common extends Controller {
 			);
 		}
 	}
+	// 通过ip查地址
+	function get_ip_location($queryIP) {
+		if ($queryIP == '127.0.0.1') {
+			return '本地';
+		} else {
+			$url = 'http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=' . $queryIP;
+
+			//如果是新浪，这里的URL是：'http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip='.$queryIP;
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_ENCODING, 'gb2312');
+			curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // 获取数据返回
+			$result = curl_exec($ch);
+			$result = mb_convert_encoding($result, "utf-8", "gb2312"); // 编码转换，否则乱码
+			curl_close($ch);
+			$result = json_decode($result, true);
+			// preg_match("@<span>(.*)</span></p>@iU", $result, $ipArray); //匹配标签，抓取查询到的ip地址(以数组的形式返回)
+			$location = $result['country'];
+			if ($result['province']) {
+				$location = $location . '-' . $result['province'];
+			}
+			if ($result['city'] && $result['province'] !== $result['city']) {
+				$location = $location . '-' . $result['city'];
+			}
+			if ($result['isp']) {
+				$location = $location . '-' . $result['isp'];
+			}
+			return $location ? $location : '未知';
+		}
+	}
 	// 判断是否登录
 	public function login_uid() {
 		if (session('user_id')) {
@@ -498,30 +533,44 @@ class Common extends Controller {
 		}
 	}
 	// 获得留言
-	public function get_lmsg($id, $type) {
-		$join = [['erhuo_user s', 's.user_id = l.lmsg_sid'], ['erhuo_user r', 'r.user_id = l.lmsg_rid']];
-		$field = 'lmsg_id, lmsg_lid, lmsg_content,r.user_id as ruser_id,r.user_icon as ruser_icon,r.user_name as ruser_name,s.user_id as suser_id, s.user_name as suser_name, s.user_icon as suser_icon, lmsg_content, lmsg_star, lmsg_status, lmsg_time';
-		if ($type === 0) {
-			$iid = 'lmsg_id';
-		} else {
-			$iid = 'lmsg_gid';
+	public function get_msg($id, $type, $more = true) {
+
+		// if ($type === 0) {
+		// 	$iid = 'lmsg_id';
+		// } else {
+		// 	$iid = 'lmsg_gid';
+		// }
+		switch ($type) {
+		case 'goods':
+			$db_name = 'lmsg';
+			$type_num = 0;
+			break;
+		case 'dynamic':
+			$db_name = 'dmsg';
+			$type_num = 2;
 		}
-		$res = db('lmsg')->alias('l')->join($join)->field($field)->where($iid, $id)->order('lmsg_time desc')->select();
+		$join = [['erhuo_user s', 's.user_id = l.' . $db_name . '_sid'], ['erhuo_user r', 'r.user_id = l.' . $db_name . '_rid']];
+		$field = $db_name . '_id, ' . $db_name . '_lid, ' . $db_name . '_content,r.user_id as ruser_id,r.user_icon as ruser_icon,r.user_name as ruser_name,s.user_id as suser_id, s.user_name as suser_name, s.user_icon as suser_icon, ' . $db_name . '_content, ' . $db_name . '_status, ' . $db_name . '_time';
+		if (is_array($id)) {
+			$res = db($db_name)->alias('l')->join($join)->field($field)->where($id)->order($db_name . '_time desc')->select();
+		} else {
+			$res = db($db_name)->alias('l')->join($join)->field($field)->where($db_name . '_gid', $id)->order($db_name . '_time desc')->select();
+		}
 		$res = $this->arrange_data($res, 'ruser');
 		$res = $this->arrange_data($res, 'suser');
 		$data = [];
-		if ($type !== 0) {
+		if ($more) {
 			foreach ($res as $key => $value) {
-				if ($value['lmsg_lid'] === 0) {
-					$value['praise_num'] = $this->get_praise_num(0, $value['lmsg_id']);
-					$value['is_praise'] = $this->is_praise(0, $value['lmsg_id']);
+				if ($value[$db_name . '_lid'] === 0) {
+					$value['praise_num'] = $this->get_praise_num($type_num, $value[$db_name . '_id']);
+					$value['is_praise'] = $this->is_praise($type_num, $value[$db_name . '_id']);
 					array_push($data, $value);
 				}
 			}
 			foreach ($res as $key => $value) {
-				if ($value['lmsg_lid'] !== 0) {
+				if ($value[$db_name . '_lid'] !== 0) {
 					foreach ($data as $k => $val) {
-						if ($value['lmsg_lid'] === $val['lmsg_id']) {
+						if ($value[$db_name . '_lid'] === $val[$db_name . '_id']) {
 							if (!isset($data[$k]['children'])) {
 								$data[$k]['children'] = [];
 							}
@@ -613,7 +662,7 @@ class Common extends Controller {
 			if ($type == 1) {
 				// 收藏 留言
 				$res['fans_num'] = db('goodsrship')->where('followers_id', $gid)->count();
-				$res['goods_lmsg'] = $this->get_lmsg($gid, 'goods');
+				$res['goods_lmsg'] = $this->get_msg($gid, 'goods');
 				$res['is_fans'] = $this->is_fans('goods', $gid, session('user_id'));
 			}
 			return $res;

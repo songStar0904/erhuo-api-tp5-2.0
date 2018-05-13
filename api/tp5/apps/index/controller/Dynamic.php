@@ -40,29 +40,46 @@ class Dynamic extends Common {
 		$res = $_db->page($data['page'], $data['num'])->select();
 		$total = $c_db->count();
 		if ($res !== false) {
-			$res = $this->arrange_data($res, 'user');
-			foreach ($res as $key => $value) {
-				// 获得图片
-				// $icon = db('gicon')->where('gIcon_gid', $value['goods_id'])->field('gIcon_url')->select();
-				// foreach ($icon as $k => $val) {
-				// 	$res[$key]['goods_icon'][$k]['url'] = $val['gIcon_url'];
-				// }
-				$res[$key]['praise_num'] = db('praise')->where('praise_type=1 AND praise_mid=' . $value['dynamic_id'])->count();
-				$res[$key]['is_praise'] = db('praise')->where('praise_type=1 AND praise_mid=' . $value['dynamic_id'])->where('praise_uid', $uid)->find() ? true : false;
-				$res[$key]['comment_num'] = db('lmsg')->where('lmsg_type=1 AND lmsg_gid=' . $value['dynamic_id'])->count();
-				// 商品动态
-				if ($res[$key]['dynamic_type'] == 2 && $res[$key]['dynamic_gid'] !== 0) {
-					$res[$key]['goods'] = $this->get_one_goods($res[$key]['dynamic_gid'], 1);
-				}
-				// 转发动态
-				if ($res[$key]['dynamic_lid'] !== 0) {
-					$res[$key]['children'] = $this->get_one_dynamic($res[$key]['dynamic_lid']);
-				}
-			}
+			$res = $this->get_dynamic_more($res);
 			$this->return_msg(200, '查询动态成功', $res, $total);
 		} else {
 			$this->return_msg(400, '查询动态失败', $res);
 		}
+	}
+	public function get_one() {
+		$data = $this->params;
+		$join = [['erhuo_user u', 'u.user_id = d.dynamic_uid']];
+		$field = 'dynamic_id, dynamic_content, dynamic_time, dynamic_time, dynamic_type, dynamic_lid, dynamic_gid, dynamic_share, user_id, user_name, user_icon';
+		$res = db('dynamic')->alias('d')->join($join)->field($field)->where('dynamic_id', $data['id'])->select();
+		if ($res !== false) {
+			$res = $this->get_dynamic_more($res);
+			$this->return_msg(200, '查询动态成功', $res);
+		} else {
+			$this->return_msg(400, '查询动态失败', $res);
+		}
+	}
+	public function get_dynamic_more($res) {
+		$res = $this->arrange_data($res, 'user');
+		foreach ($res as $key => $value) {
+			// 获得图片
+			// $icon = db('gicon')->where('gIcon_gid', $value['goods_id'])->field('gIcon_url')->select();
+			// foreach ($icon as $k => $val) {
+			// 	$res[$key]['goods_icon'][$k]['url'] = $val['gIcon_url'];
+			// }
+			$uid = session('user_id');
+			$res[$key]['praise_num'] = db('praise')->where('praise_type=1 AND praise_mid=' . $value['dynamic_id'])->count();
+			$res[$key]['is_praise'] = db('praise')->where('praise_type=1 AND praise_mid=' . $value['dynamic_id'])->where('praise_uid', $uid)->find() ? true : false;
+			$res[$key]['comment_num'] = db('dmsg')->where('dmsg_gid=' . $value['dynamic_id'])->count();
+			// 商品动态
+			if ($res[$key]['dynamic_type'] == 2 && $res[$key]['dynamic_gid'] !== 0) {
+				$res[$key]['goods'] = $this->get_one_goods($res[$key]['dynamic_gid'], 1);
+			}
+			// 转发动态
+			if ($res[$key]['dynamic_lid'] !== 0) {
+				$res[$key]['children'] = $this->get_one_dynamic($res[$key]['dynamic_lid']);
+			}
+		}
+		return $res;
 	}
 	public function add() {
 		$data = $this->params;
@@ -113,7 +130,7 @@ class Dynamic extends Common {
 			$id = db('dynamic')->order('dynamic_time desc')->page(1, 1)->find()['dynamic_id'];
 			$res = $this->get_one_dynamic($id);
 			db('dynamic')->where('dynamic_id', $dynamic_lid)->setInc('dynamic_share');
-			$this->add_pop($params['dynamic_uid'], 2);
+			$this->add_pop($data['dynamic_uid'], 2);
 			$this->return_msg(200, '分享动态成功', $res);
 		}
 	}
